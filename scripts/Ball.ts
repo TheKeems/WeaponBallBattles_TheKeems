@@ -127,9 +127,9 @@ export class Ball extends Container {
       }
     }
 
-    this.collideWithBorder(appBounds);
+    this.collideWithBorder(appBounds, delta);
 
-    this.velocity.y += 0.2;
+    this.velocity.y += 0.2 * delta;
 
   }
 
@@ -154,7 +154,7 @@ export class Ball extends Container {
     return (dx * dx + dy * dy) < (this.scl * 50 * this.scl * 50);
   }
 
-  collideWithBorder(appBounds: appBounds){
+  collideWithBorder(appBounds: appBounds, delta : number){
     const hw = this.width / 2;
     const hh = this.height / 2;
 
@@ -162,13 +162,13 @@ export class Ball extends Container {
       this.x = appBounds.left + hw;
       this.velocity.x = Math.abs(this.velocity.x);
       if(Math.abs(this.velocity.x) <= 3){
-        this.velocity.x += 3;
+        this.velocity.x += 3 * delta;
       }
     } else if (this.x + hw >= appBounds.right) {
       this.x = appBounds.right - hw;
       this.velocity.x = -Math.abs(this.velocity.x);
       if(Math.abs(this.velocity.x) <= 3){
-        this.velocity.x -= 3;
+        this.velocity.x -= 3 * delta;
       }
     }
 
@@ -180,10 +180,10 @@ export class Ball extends Container {
       
       this.velocity.y = -Math.abs(this.velocity.y);
       if(this.velocity.y > -10){
-        this.velocity.y -= 3;
+        this.velocity.y -= 3 * delta;
       }
       if(Math.abs(this.velocity.x) <= 3){
-        this.velocity.x += randInt(-1, 1) * this.speed;
+        this.velocity.x += randInt(-1, 1) * this.speed * delta;
       }
     }
   }
