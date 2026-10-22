@@ -1,0 +1,106 @@
+{
+  "bundles": [
+    {
+      "name": "default",
+      "assets": []
+    },
+    {
+      "name": "main",
+      "assets": [
+        {
+          "alias": [
+            "main/balls.json",
+            "balls.json"
+          ],
+          "src": [
+            "main/balls.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/base_ball.svg",
+            "base_ball.svg"
+          ],
+          "src": [
+            "main/base_ball.svg"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/empty.png",
+            "empty.png"
+          ],
+          "src": [
+            "main/empty@0.5x.webp",
+            "main/empty@0.5x.png",
+            "main/empty.webp",
+            "main/empty.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/sword.png",
+            "sword.png"
+          ],
+          "src": [
+            "main/sword@0.5x.webp",
+            "main/sword@0.5x.png",
+            "main/sword.webp",
+            "main/sword.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/unarmed.svg",
+            "unarmed.svg"
+          ],
+          "src": [
+            "main/unarmed.svg"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/verity.png",
+            "verity.png"
+          ],
+          "src": [
+            "main/verity@0.5x.webp",
+            "main/verity@0.5x.png",
+            "main/verity.webp",
+            "main/verity.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
