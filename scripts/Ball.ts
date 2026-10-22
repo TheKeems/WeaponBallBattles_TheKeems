@@ -12,19 +12,21 @@ export interface BallConfig {
   file: string;
   atk: number;
   scl: number;
-  speed: number;
+  speedCap: number;
   tint : ColorSource
 }
 
-interface BComponent{
-  category : string;
+export interface BComponent{
+  categories : string[];
+  parent : Ball;
+  run(...params : any) : any;
 }
 
 
 export class Ball extends Container {
   private health;
   private atk;
-  public speed;
+  public speedCap;
   public scl;
   public title;
   public team;
@@ -35,7 +37,7 @@ export class Ball extends Container {
   public hitboxes: Hitbox[];
   public cellArr: Ball[] | null = null;
   public velocity: Velocity;
-  private components : Map<string, BComponent> = new Map();
+  private components : BComponent[];
 
   constructor(
     ballType: string,
@@ -43,7 +45,7 @@ export class Ball extends Container {
     team : number = 0,
     health : number = 100
   ) {
-    const {title, file, atk, scl, speed, tint} = ballsconfig[ballType];
+    const {title, file, atk, scl, speedCap, tint} = ballsconfig[ballType];
 
     super();
     
@@ -60,12 +62,13 @@ export class Ball extends Container {
     this.scl = scl;
     this.name = ballType;
     this.title = title;
-    this.speed = speed;
+    this.speedCap = speedCap;
     this.health = health;
     this.atk = atk;
     this.team = team;
     this.hitboxes = [];
     this.colorMatrix = new ColorMatrixFilter();
+    this.components = [];
 
     if(tint){
       this.tint = tint;
@@ -83,7 +86,7 @@ export class Ball extends Container {
     this.addChild(this.healthLabel);
 
     const angle = Math.random() * Math.PI * 2;
-    this.velocity = { x: Math.cos(angle) * speed, y: Math.sin(angle) * speed };
+    this.velocity = { x: Math.cos(angle) * speedCap, y: Math.sin(angle) * speedCap };
   }
 
   async loadText(file : string){
@@ -127,9 +130,9 @@ export class Ball extends Container {
       }
     }
 
-    this.collideWithBorder(appBounds);
+    this.collideWithBorder(appBounds, delta);
 
-    this.velocity.y += 0.2;
+    this.velocity.y += 0.2 * delta;
 
   }
 
@@ -154,7 +157,7 @@ export class Ball extends Container {
     return (dx * dx + dy * dy) < (this.scl * 50 * this.scl * 50);
   }
 
-  collideWithBorder(appBounds: appBounds){
+  collideWithBorder(appBounds: appBounds, delta : number){
     const hw = this.width / 2;
     const hh = this.height / 2;
 
@@ -162,13 +165,13 @@ export class Ball extends Container {
       this.x = appBounds.left + hw;
       this.velocity.x = Math.abs(this.velocity.x);
       if(Math.abs(this.velocity.x) <= 3){
-        this.velocity.x += 3;
+        this.velocity.x += 3 * delta;
       }
     } else if (this.x + hw >= appBounds.right) {
       this.x = appBounds.right - hw;
       this.velocity.x = -Math.abs(this.velocity.x);
       if(Math.abs(this.velocity.x) <= 3){
-        this.velocity.x -= 3;
+        this.velocity.x -= 3 * delta;
       }
     }
 
@@ -180,10 +183,10 @@ export class Ball extends Container {
       
       this.velocity.y = -Math.abs(this.velocity.y);
       if(this.velocity.y > -10){
-        this.velocity.y -= 3;
+        this.velocity.y -= 3 * delta;
       }
       if(Math.abs(this.velocity.x) <= 3){
-        this.velocity.x += randInt(-1, 1) * this.speed;
+        this.velocity.x += randInt(-1, 1) * this.speedCap * delta;
       }
     }
   }
@@ -220,19 +223,25 @@ collideWith(other: Ball, reflected: boolean = true): boolean {
 
   this.velocity.x -= approachSpeed * nx;
   this.velocity.y -= approachSpeed * ny;
-  this.setSpeed(this.speed, -nx, -ny);
+  this.setSpeed(this.speedCap, -nx, -ny);
+
+  for(const key of this.components){
+    if(key.categories.includes("onHit")){
+      key.run(other);
+    }
+  }
 
   return true;
 }
 
-  private setSpeed(speed: number, x: number, y: number) {
+  private setSpeed(speedCap: number, x: number, y: number) {
     const cur = Math.hypot(this.velocity.x, this.velocity.y);
     if (cur === 0) {
-      this.velocity.x = x * speed;
-      this.velocity.y = y * speed;
+      this.velocity.x = x * speedCap;
+      this.velocity.y = y * speedCap;
     } else {
-      this.velocity.x = (this.velocity.x / cur) * speed;
-      this.velocity.y = (this.velocity.y / cur) * speed;
+      this.velocity.x = (this.velocity.x / cur) * speedCap;
+      this.velocity.y = (this.velocity.y / cur) * speedCap;
     }
   }
 
@@ -252,28 +261,33 @@ collideWith(other: Ball, reflected: boolean = true): boolean {
     this.hitboxes.push(new Hitbox(this, file, this.getAtk(), height, width, anchor));
   }
 
-  addComponent(s : string, c : BComponent){
-    this.components.set(s, c);
+  addComponent(c : BComponent){
+    this.components.push(c);
   }
 
-  getComponent(s : string){
-    return this.components.get(s);
-  }
+  // getComponent(s : string){
+  //   return this.components.get(s);
+  // }
 
-  hasComponent(s : string) : boolean{
-    return this.components.has(s);
-  }
+  // hasComponent(s : string) : boolean{
+  //   return this.components.has(s);
+  // }
 
 }
 
-class HitDamageComponent implements BComponent{
-  readonly category = "onHit";
-  private parent;
-  constructor(parent : Ball){
+export class DamageEnemyComponent implements BComponent{
+  readonly categories;
+  parent;
+  constructor(parent : Ball, categories : string[]){
     this.parent = parent;
+    this.categories = categories;
   }
 
-  Hit(other : Ball){
+  run(other : Ball){
+    if(this.parent.name === "unarmed"){
+      this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y));
+      this.parent.speedCap += 0.2;
+    }
     this.parent.hitboxes[0].dealDamage(other);
   }
 }
