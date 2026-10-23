@@ -34,7 +34,7 @@ export class Unarmed extends Ball{
 
   dealDamage(other : Ball){
     super.dealDamage(other);
-    this.speed += 0.2;
+    this.speedCap += 0.2;
   }
 
 
