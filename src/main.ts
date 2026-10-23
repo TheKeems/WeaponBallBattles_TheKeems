@@ -43,8 +43,6 @@ let ballsconfig: Record<string, BallConfig>;
   });
   document.getElementById("pixi-container")!.appendChild(app.canvas);
 
-  //app.ticker.maxFPS = 60; 
-
   const gameContainer = new Container();
   app.stage.addChild(gameContainer);
 
