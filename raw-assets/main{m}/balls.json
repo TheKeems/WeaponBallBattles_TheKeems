@@ -12,6 +12,11 @@
         "atk" : 1,
         "scl" : 1,
         "speedCap" : 8,
+        "displayedStats" : {
+            "Health" : 100,
+            "Current Speed" : 0,
+            "Max Speed" : 0
+        },
         "tint" : "#808080"
     },
     "sword" : {

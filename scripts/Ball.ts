@@ -1,5 +1,5 @@
-import { Assets,  Sprite, Text, Container, ColorMatrixFilter, ColorSource} from "pixi.js";
-import {removeFromArr, randInt, appBounds, setTimeflow} from "../src/main";
+import { Assets, Sprite, Text, Container, ColorMatrixFilter, ColorSource } from "pixi.js";
+import { removeFromArr, randInt, appBounds, setTimeflow } from "../src/main";
 import { Hitbox } from "./Hitbox";
 
 export interface Velocity {
@@ -13,13 +13,13 @@ export interface BallConfig {
   atk: number;
   scl: number;
   speedCap: number;
-  tint : ColorSource
+  tint: ColorSource
 }
 
-export interface BComponent{
-  categories : string[];
-  parent : Ball;
-  run(...params : any) : any;
+export interface BComponent {
+  categories: string[];
+  parent: Ball;
+  run(...params: any): any;
 }
 
 
@@ -32,26 +32,26 @@ export class Ball extends Container {
   public team;
   public name;
   private colorMatrix;
-  private sprite : Sprite;
-  public healthLabel = new Text({text : ""});
+  private sprite: Sprite;
+  public healthLabel = new Text({ text: "" });
   public hitboxes: Hitbox[];
   public cellArr: Ball[] | null = null;
   public velocity: Velocity;
-  private components : BComponent[];
+  private components: BComponent[];
 
   constructor(
     ballType: string,
-    ballsconfig : Record<string, BallConfig>,
-    team : number = 0,
-    health : number = 100
+    ballsconfig: Record<string, BallConfig>,
+    team: number = 0,
+    health: number = 100
   ) {
-    const {title, file, atk, scl, speedCap, tint} = ballsconfig[ballType];
+    const { title, file, atk, scl, speedCap, tint } = ballsconfig[ballType];
 
     super();
-    
+
     this.loadText(file);
 
-    this.sprite = new Sprite({      
+    this.sprite = new Sprite({
       texture: Assets.get(file),
       anchor: 0.5,
       scale: scl,
@@ -70,7 +70,7 @@ export class Ball extends Container {
     this.colorMatrix = new ColorMatrixFilter();
     this.components = [];
 
-    if(tint){
+    if (tint) {
       this.tint = tint;
     }
 
@@ -89,40 +89,47 @@ export class Ball extends Container {
     this.velocity = { x: Math.cos(angle) * speedCap, y: Math.sin(angle) * speedCap };
   }
 
-  async loadText(file : string){
+  async loadText(file: string) {
     const texture = await Assets.load(file);
     return texture;
   }
 
-  update(delta: number, appBounds: appBounds, deltams : number, collisionMatrix : Ball[][][]){
+  update(delta: number, appBounds: appBounds, deltams: number, collisionMatrix: Ball[][][]) {
+    //ON DEATH
+    if (this.health <= 0) {
+      this.removeFromParent();
+      this.destroy({ children: true })
+      return;
+    }
+
     this.move(delta, appBounds, collisionMatrix);
-    for(const key of this.hitboxes){
-        key.update(deltams, appBounds, collisionMatrix);
+    for (const key of this.hitboxes) {
+      key.update(deltams, appBounds, collisionMatrix);
     }
   }
 
-  move(delta: number, appBounds: appBounds, collisionMatrix : Ball[][][]) {
+  move(delta: number, appBounds: appBounds, collisionMatrix: Ball[][][]) {
 
     this.x += this.velocity.x * delta;
     this.y += this.velocity.y * delta;
 
     //well apparently my collision matrix is buggy ash so ig ill do ts
-    const cell = collisionMatrix[Math.floor(this.x/appBounds.cell_size)][Math.floor(this.y/appBounds.cell_size)];
+    const cell = collisionMatrix[Math.floor(this.x / appBounds.cell_size)][Math.floor(this.y / appBounds.cell_size)];
     if (cell !== this.cellArr) {
-      if (this.cellArr){
+      if (this.cellArr) {
         removeFromArr(this.cellArr, this);
-      } 
+      }
       cell.push(this);
       this.cellArr = cell;
     }
 
-    for(let i = -1; i <= 1; i++){
-      for(let j = -1; j <= 1; j++){
-        let r = Math.floor(this.x/appBounds.cell_size) + i;
-        let c = Math.floor(this.y/appBounds.cell_size) + j;
-        if(r >= 0 && c >= 0 && r < collisionMatrix.length && c < collisionMatrix[r].length){
+    for (let i = -1; i <= 1; i++) {
+      for (let j = -1; j <= 1; j++) {
+        let r = Math.floor(this.x / appBounds.cell_size) + i;
+        let c = Math.floor(this.y / appBounds.cell_size) + j;
+        if (r >= 0 && c >= 0 && r < collisionMatrix.length && c < collisionMatrix[r].length) {
           for (const key of collisionMatrix[r][c]) {
-            if (key != this){
+            if (key != this) {
               this.collideWith(key);
             }
           }
@@ -136,19 +143,21 @@ export class Ball extends Container {
 
   }
 
-  dealDamage(other : Ball){
+  dealDamage(other: Ball) {
     other.takeDamage(this.atk);
   }
 
-  takeDamage(damageTaken : number){
+  takeDamage(damageTaken: number) {
     this.health -= damageTaken;
     this.healthLabel.text = Math.round(this.health);
     this.colorMatrix.brightness(1.2, false);
-    setTimeflow(false);
-    setTimeout(() => {
+    if(this.health > 0){
+      setTimeflow(false);
+      setTimeout(() => {
         this.colorMatrix.brightness(1.0, false);
         setTimeflow(true);
-    }, 100);
+      }, 100);
+    }
   }
 
   checkHit(x: number, y: number): boolean {
@@ -157,20 +166,20 @@ export class Ball extends Container {
     return (dx * dx + dy * dy) < (this.scl * 50 * this.scl * 50);
   }
 
-  collideWithBorder(appBounds: appBounds, delta : number){
+  collideWithBorder(appBounds: appBounds, delta: number) {
     const hw = this.width / 2;
     const hh = this.height / 2;
 
     if (this.x - hw <= appBounds.left) {
       this.x = appBounds.left + hw;
       this.velocity.x = Math.abs(this.velocity.x);
-      if(Math.abs(this.velocity.x) <= 3){
+      if (Math.abs(this.velocity.x) <= 3) {
         this.velocity.x += 3 * delta;
       }
     } else if (this.x + hw >= appBounds.right) {
       this.x = appBounds.right - hw;
       this.velocity.x = -Math.abs(this.velocity.x);
-      if(Math.abs(this.velocity.x) <= 3){
+      if (Math.abs(this.velocity.x) <= 3) {
         this.velocity.x -= 3 * delta;
       }
     }
@@ -180,59 +189,64 @@ export class Ball extends Container {
       this.velocity.y = Math.abs(this.velocity.y);
     } else if (this.y + hh >= appBounds.bottom) {
       this.y = appBounds.bottom - hh;
-      
+
       this.velocity.y = -Math.abs(this.velocity.y);
-      if(this.velocity.y > -10){
+      if (this.velocity.y > -10) {
         this.velocity.y -= 3 * delta;
       }
-      if(Math.abs(this.velocity.x) <= 3){
+      if (Math.abs(this.velocity.x) <= 3) {
         this.velocity.x += randInt(-1, 1) * this.speedCap * delta;
       }
     }
   }
 
-collideWith(other: Ball, reflected: boolean = true): boolean {
-  const ox = other.x;
-  const oy = other.y;
-  const ovx = other.velocity.x;
-  const ovy = other.velocity.y;
+  collideWith(other: Ball, reflected: boolean = true): boolean {
 
-  const dx = ox - this.x;
-  const dy = oy - this.y;
-  const dist = Math.hypot(dx, dy);
-  const minDist = 50 * this.scl + 50 * other.scl;
-  if (dist >= minDist) {
-    return false;
-  }
-
-  if (reflected) {
-    other.collideWith(this, false);
-  }
-
-  const nx = dist === 0 ? (reflected ? 1 : -1) : dx / dist;
-  const ny = dist === 0 ? 0 : dy / dist;
-
-  const overlap = minDist - dist;
-  this.x -= nx * overlap / 2;
-  this.y -= ny * overlap / 2;
-
-  const approachSpeed = (this.velocity.x - ovx) * nx + (this.velocity.y - ovy) * ny;
-  if (approachSpeed <= 0) {
-    return false;
-  }
-
-  this.velocity.x -= approachSpeed * nx;
-  this.velocity.y -= approachSpeed * ny;
-  this.setSpeed(this.speedCap, -nx, -ny);
-
-  for(const key of this.components){
-    if(key.categories.includes("onHit")){
-      key.run(other);
+    if (!other || other.destroyed || !this || this.destroyed) {
+      return false;
     }
-  }
 
-  return true;
-}
+    const ox = other.x;
+    const oy = other.y;
+    const ovx = other.velocity.x;
+    const ovy = other.velocity.y;
+
+    const dx = ox - this.x;
+    const dy = oy - this.y;
+    const dist = Math.hypot(dx, dy);
+    const minDist = 50 * this.scl + 50 * other.scl;
+    if (dist >= minDist) {
+      return false;
+    }
+
+    if (reflected) {
+      other.collideWith(this, false);
+    }
+
+    const nx = dist === 0 ? (reflected ? 1 : -1) : dx / dist;
+    const ny = dist === 0 ? 0 : dy / dist;
+
+    const overlap = minDist - dist;
+    this.x -= nx * overlap / 2;
+    this.y -= ny * overlap / 2;
+
+    const approachSpeed = (this.velocity.x - ovx) * nx + (this.velocity.y - ovy) * ny;
+    if (approachSpeed <= 0) {
+      return false;
+    }
+
+    this.velocity.x -= approachSpeed * nx;
+    this.velocity.y -= approachSpeed * ny;
+    this.setSpeed(this.speedCap, -nx, -ny);
+
+    for (const key of this.components) {
+      if (key.categories.includes("onHit")) {
+        key.run(other);
+      }
+    }
+
+    return true;
+  }
 
   private setSpeed(speedCap: number, x: number, y: number) {
     const cur = Math.hypot(this.velocity.x, this.velocity.y);
@@ -245,23 +259,23 @@ collideWith(other: Ball, reflected: boolean = true): boolean {
     }
   }
 
-  addAtk(i : number){
+  addAtk(i: number) {
     this.atk += i;
   }
 
-  setAtk(i : number){
+  setAtk(i: number) {
     this.atk = i;
   }
 
-  getAtk() : number{
+  getAtk(): number {
     return this.atk;
   }
 
-  addHitbox(file : string, width : number, height : number, anchor : number){
+  addHitbox(file: string, width: number, height: number, anchor: number) {
     this.hitboxes.push(new Hitbox(this, file, this.getAtk(), height, width, anchor));
   }
 
-  addComponent(c : BComponent){
+  addComponent(c: BComponent) {
     this.components.push(c);
   }
 
@@ -275,16 +289,16 @@ collideWith(other: Ball, reflected: boolean = true): boolean {
 
 }
 
-export class DamageEnemyComponent implements BComponent{
+export class DamageEnemyComponent implements BComponent {
   readonly categories;
   parent;
-  constructor(parent : Ball, categories : string[]){
+  constructor(parent: Ball, categories: string[]) {
     this.parent = parent;
     this.categories = categories;
   }
 
-  run(other : Ball){
-    if(this.parent.name === "unarmed"){
+  run(other: Ball) {
+    if (this.parent.name === "unarmed") {
       this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y));
       this.parent.speedCap += 0.2;
     }
