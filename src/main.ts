@@ -58,7 +58,7 @@ let ballsconfig: Record<string, BallConfig>;
   ball.addComponent(new DamageEnemyComponent(ball, ["onHit"]));
   ball.addHitbox(new Hitbox(ball, "empty.png", ball.getAtk(), 100, 100, hitboxShape.CIRCLE, 0.5));
   const ball1 = new Ball("sword", ballsconfig, 0);
-  ball1.addHitbox(new Melee(ball1, "sword.png", ball1.getAtk(), 200, 50, 0.005, hitboxShape.RECT, 0, 0.5));
+  ball1.addHitbox(new Melee(ball1, "sword.png", ball1.getAtk(), 500, 100, 0.005, hitboxShape.RECT, -0.1, 0.5));
 
   gameContainer.addChild(ball);
   gameContainer.addChild(ball1);

@@ -32,6 +32,8 @@ export class Ball extends Container {
   public title;
   public team;
   public name;
+  public hitbox_height;
+  public hitbox_width;
   private colorMatrix;
   private sprite: Sprite;
   public healthLabel = new Text({ text: "" });
@@ -71,6 +73,9 @@ export class Ball extends Container {
     this.colorMatrix = new ColorMatrixFilter();
     this.components = [];
 
+    this.hitbox_height = 100 * this.scl;
+    this.hitbox_width = 100 * this.scl;
+
     if (tint) {
       this.sprite.tint = tint;
     }
@@ -79,7 +84,7 @@ export class Ball extends Container {
     this.addChild(this.sprite);
 
     this.healthLabel.anchor.set(0.5);
-    //this.healthLabel.zIndex = 999;
+    this.healthLabel.zIndex = 999;
     this.healthLabel.text = this.health;
 
     this.setSize(100 * scl, 100 * scl);
@@ -168,8 +173,8 @@ export class Ball extends Container {
   }
 
   collideWithBorder(appBounds: appBounds, delta: number) {
-    const hw = this.width / 2;
-    const hh = this.height / 2;
+    const hw = (100 * this.scl) / 2;
+    const hh = (100 * this.scl) / 2;
 
     if (this.x - hw <= appBounds.left) {
       this.x = appBounds.left + hw;
@@ -302,7 +307,7 @@ export class DamageEnemyComponent implements BComponent {
 
   run(other: Ball) {
     if (this.parent.name === "unarmed") {
-      this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y));
+      this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y)/2);
       this.parent.speedCap += 0.2;
     }
     this.parent.hitboxes[0].dealDamage(other);

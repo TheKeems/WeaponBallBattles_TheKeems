@@ -13,7 +13,7 @@ export class Unarmed extends Ball{
     ){
         super("unarmed", ballsconfig, team, health);
 
-        this.hitboxes.push(new Hitbox(this, "empty.png", this.getAtk(), 100, 100, 0.5, hitboxShape.CIRCLE));
+        this.hitboxes.push(new Hitbox(this, "empty.png", this.getAtk(), 100, 100, hitboxShape.CIRCLE, 0.5));
         this.addChild(this.healthLabel);
 
         //this.tint = 0x808080;
