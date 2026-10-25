@@ -280,7 +280,7 @@ export class Ball extends Container {
   addHitbox(h : Hitbox) {
     this.hitboxes.push(h);
     this.addChild(h);
-    console.log(this.children);
+    //console.log(this.children);
   }
 
   addComponent(c: BComponent) {

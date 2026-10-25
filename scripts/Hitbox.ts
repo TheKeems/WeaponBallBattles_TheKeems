@@ -8,11 +8,11 @@ export interface iFrame {
     duration: number;
 }
 
-interface HComponent{
-  category : string;
+interface HComponent {
+    category: string;
 }
 
-export enum hitboxShape{
+export enum hitboxShape {
     RECT,
     CIRCLE
 }
@@ -21,7 +21,7 @@ export class Hitbox extends Sprite {
     public dmg = 0;
     public par: Ball;
     public iFrames: iFrame[] = [];
-    private shape : hitboxShape;
+    private shape: hitboxShape;
     private hitbox_width;
     private hitbox_height;
 
@@ -31,16 +31,16 @@ export class Hitbox extends Sprite {
         dmg: number,
         width: number,
         height: number,
-        shape : hitboxShape,
-        anchor : number,
-        a_2 : number = -1
+        shape: hitboxShape,
+        anchor: number,
+        a_2: number = -1
     ) {
         super({
             texture: Assets.get(file),
             anchor: anchor,
         })
 
-        if(a_2 != -1){
+        if (a_2 != -1) {
             //console.log("ASAS");
             this.anchor.x = anchor;
             this.anchor.y = a_2;
@@ -56,6 +56,7 @@ export class Hitbox extends Sprite {
     update(deltams: number, appBounds: appBounds, collisionMatrix: Ball[][][]) {
         for (const i of this.iFrames) {
             i.duration -= deltams;
+            console.log(deltams);
             if (i.duration <= 0) {
                 removeFromArr(this.iFrames, i);
             }
@@ -87,72 +88,69 @@ export class Hitbox extends Sprite {
         // }
     }
 
+    getCorners(obj: Hitbox | Ball): Point[] {
+        const w = (obj instanceof Hitbox) ? obj.hitbox_width : obj.hitbox_width;
+        const h = (obj instanceof Hitbox) ? obj.hitbox_height : obj.hitbox_height;
+
+        const ax = obj instanceof Hitbox ? obj.anchor.x : 0.5;
+        const ay = obj instanceof Hitbox ? obj.anchor.y : 0.5;
+
+        const local = [
+            new Point(-ax * w, -ay * h),
+            new Point((1 - ax) * w, -ay * h),
+            new Point((1 - ax) * w, (1 - ay) * h),
+            new Point(-ax * w, (1 - ay) * h),
+        ];
+
+        return local.map(p => obj.toGlobal(p));
+    };
+
     checkHit(other: Ball): boolean {
-        if(this.shape === hitboxShape.CIRCLE){
+        if (this.shape === hitboxShape.CIRCLE) {
             const dx = other.x - this.x;
             const dy = other.y - this.y;
             const dist = Math.hypot(dx, dy);
-            const minDist = this.width/2 * this.par.scl + this.width/2 * other.scl;
-            return (dist < minDist);
+            const minDist = this.width / 2 * this.par.scl + this.width / 2 * other.scl;
+            return dist < minDist;
         }
-        else if(this.shape === hitboxShape.RECT){
-            const getCorners = (obj : Hitbox | Ball) => {
-                const w = (obj instanceof Hitbox) ? obj.hitbox_width : obj.hitbox_width;
-                const h = (obj instanceof Hitbox) ? obj.hitbox_height : obj.hitbox_height;
 
-                const ax = (obj instanceof Hitbox) ? obj.anchor.x : 0;
-                const ay = (obj instanceof Hitbox) ? obj.anchor.y : 0;
-
-                const localCorners = [
-                    { x: -ax * w,       y: -ay * h },    
-                    { x: (1 - ax) * w,  y: -ay * h },     
-                    { x: (1 - ax) * w,  y: (1 - ay) * h },  
-                    { x: -ax * w,       y: (1 - ay) * h }  
-                ];
-
-                return localCorners.map(corner => obj.worldTransform.apply(corner));
-            };
-
-            const cornersA = getCorners(this);
-            const cornersB = getCorners(other);
-
-            const getAxes = (corners: string | any[]) => {
-                const axes = [];
-                for (let i = 0; i < corners.length; i++) {
-                    const p1 = corners[i];
-                    const p2 = corners[(i + 1) % corners.length];
-                    const edge = { x: p2.x - p1.x, y: p2.y - p1.y };
-                    const normal = { x: -edge.y, y: edge.x };
-                    const length = Math.hypot(normal.x, normal.y);
-                    axes.push({ x: normal.x / length, y: normal.y / length });
+        if (this.shape === hitboxShape.RECT) {
+            const getAxes = (c: Point[]) => {
+                const axes: { x: number; y: number }[] = [];
+                for (let i = 0; i < 2; i++) {
+                    const p1 = c[i];
+                    const p2 = c[i + 1];
+                    const ex = p2.x - p1.x;
+                    const ey = p2.y - p1.y;
+                    const len = Math.hypot(ex, ey);
+                    if (len < 1e-8) continue;
+                    axes.push({ x: -ey / len, y: ex / len });
                 }
                 return axes;
             };
 
-            const axes = [...getAxes(cornersA), ...getAxes(cornersB)];
-
-            for (const axis of axes) {
-                const project = (corners: Point[]) => {
-                    let min = Infinity;
-                    let max = -Infinity;
-                    for (const p of corners) {
-                        const dot = p.x * axis.x + p.y * axis.y;
-                        if (dot < min) min = dot;
-                        if (dot > max) max = dot;
-                    }
-                    return { min, max };
-                };
-
-                const projA = project(cornersA);
-                const projB = project(cornersB);
-
-                if (projA.max < projB.min || projB.max < projA.min) {
-                    return false; 
+            const project = (c: Point[], axis: { x: number; y: number }) => {
+                let min = Infinity;
+                let max = -Infinity;
+                for (const p of c) {
+                    const d = p.x * axis.x + p.y * axis.y;
+                    if (d < min) min = d;
+                    if (d > max) max = d;
                 }
-            }
+                return { min, max };
+            };
 
-            return true; 
+            const cornersA = this.getCorners(this);
+            const cornersB = this.getCorners(other);
+
+            for (const axis of [...getAxes(cornersA), ...getAxes(cornersB)]) {
+                const a = project(cornersA, axis);
+                const b = project(cornersB, axis);
+                if (a.max < b.min || b.max < a.min) return false;
+            }
+            return true;
         }
+
         return false;
     }
 
@@ -165,13 +163,18 @@ export class Hitbox extends Sprite {
         }
         if (!iframe) {
             //other.takeDamage(this.par.getAtk());
+            if(this.par.name === "sword"){
+                console.log("HIT");
+            }
             this.par.dealDamage(other);
             this.iFrames.push({ origin: other, duration: 100 });
         }
     }
 
-    getiFrames(){
+    getiFrames() {
         return this.iFrames;
     }
+
+
 
 }
