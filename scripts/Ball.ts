@@ -1,5 +1,5 @@
-import { Assets,  Sprite, Text, Container, ColorMatrixFilter, ColorSource} from "pixi.js";
-import {removeFromArr, randInt, appBounds, setTimeflow} from "../src/main";
+import { Assets, Sprite, Text, Container, ColorMatrixFilter, ColorSource } from "pixi.js";
+import { removeFromArr, randInt, appBounds, setTimeflow } from "../src/main";
 import { Hitbox } from "./Hitbox";
 
 export interface Velocity {
@@ -13,13 +13,13 @@ export interface BallConfig {
   atk: number;
   scl: number;
   speedCap: number;
-  tint : ColorSource
+  tint: ColorSource
 }
 
-export interface BComponent{
-  categories : string[];
-  parent : Ball;
-  run(...params : any) : any;
+export interface BComponent {
+  categories: string[];
+  parent: Ball;
+  run(...params: any): any;
 }
 
 
@@ -32,26 +32,26 @@ export class Ball extends Container {
   public team;
   public name;
   private colorMatrix;
-  private sprite : Sprite;
-  public healthLabel = new Text({text : ""});
+  private sprite: Sprite;
+  public healthLabel = new Text({ text: "" });
   public hitboxes: Hitbox[];
   public cellArr: Ball[] | null = null;
   public velocity: Velocity;
-  private components : BComponent[];
+  private components: BComponent[];
 
   constructor(
     ballType: string,
-    ballsconfig : Record<string, BallConfig>,
-    team : number = 0,
-    health : number = 100
+    ballsconfig: Record<string, BallConfig>,
+    team: number = 0,
+    health: number = 100
   ) {
-    const {title, file, atk, scl, speedCap, tint} = ballsconfig[ballType];
+    const { title, file, atk, scl, speedCap, tint } = ballsconfig[ballType];
 
     super();
-    
+
     this.loadText(file);
 
-    this.sprite = new Sprite({      
+    this.sprite = new Sprite({
       texture: Assets.get(file),
       anchor: 0.5,
       scale: scl,
