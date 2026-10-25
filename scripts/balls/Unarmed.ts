@@ -1,6 +1,7 @@
 import { Ball, BallConfig} from "../Ball";
 import { Hitbox } from "../Hitbox";
 import { appBounds } from "../../src/main";
+import { hitboxShape } from "../Hitbox";
 
 
 export class Unarmed extends Ball{
@@ -12,7 +13,7 @@ export class Unarmed extends Ball{
     ){
         super("unarmed", ballsconfig, team, health);
 
-        this.hitboxes.push(new Hitbox(this, "empty.png", this.getAtk(), 100, 100, 0.5));
+        this.hitboxes.push(new Hitbox(this, "empty.png", this.getAtk(), 100, 100, 0.5, hitboxShape.CIRCLE));
         this.addChild(this.healthLabel);
 
         //this.tint = 0x808080;
@@ -20,6 +21,7 @@ export class Unarmed extends Ball{
 
     update(delta: number, appBounds: appBounds, deltams : number, collisionMatrix : Ball[][][]){
         super.update(delta, appBounds, deltams, collisionMatrix);
+        
     }
 
     collideWith(other: Ball): boolean {

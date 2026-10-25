@@ -1,6 +1,6 @@
 import { Assets, Sprite, Text, Container, ColorMatrixFilter, ColorSource } from "pixi.js";
 import { removeFromArr, randInt, appBounds, setTimeflow } from "../src/main";
-import { Hitbox } from "./Hitbox";
+import { Hitbox, hitboxShape } from "../scripts/index";
 
 export interface Velocity {
   x: number;
@@ -13,6 +13,7 @@ export interface BallConfig {
   atk: number;
   scl: number;
   speedCap: number;
+  displays : {};
   tint: ColorSource
 }
 
@@ -45,7 +46,7 @@ export class Ball extends Container {
     team: number = 0,
     health: number = 100
   ) {
-    const { title, file, atk, scl, speedCap, tint } = ballsconfig[ballType];
+    const { title, file, atk, scl, speedCap, displays, tint } = ballsconfig[ballType];
 
     super();
 
@@ -71,7 +72,7 @@ export class Ball extends Container {
     this.components = [];
 
     if (tint) {
-      this.tint = tint;
+      this.sprite.tint = tint;
     }
 
     this.sprite.filters = [this.colorMatrix];
@@ -271,8 +272,10 @@ export class Ball extends Container {
     return this.atk;
   }
 
-  addHitbox(file: string, width: number, height: number, anchor: number) {
-    this.hitboxes.push(new Hitbox(this, file, this.getAtk(), height, width, anchor));
+  addHitbox(h : Hitbox) {
+    this.hitboxes.push(h);
+    this.addChild(h);
+    console.log(this.children);
   }
 
   addComponent(c: BComponent) {

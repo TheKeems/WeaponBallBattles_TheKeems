@@ -1,6 +1,6 @@
 import { Application, Assets, Graphics, Container } from "pixi.js";
 import manifest from "./manifest.json";
-import { Ball, BallConfig, Unarmed, Verity, Sword, DamageEnemyComponent} from "../scripts/index";
+import { Ball, BallConfig, hitboxShape, Hitbox, Melee, DamageEnemyComponent} from "../scripts/index";
 
 const BORDER_PADDING = 40;
 const BORDER_WIDTH = 4;
@@ -56,8 +56,9 @@ let ballsconfig: Record<string, BallConfig>;
   //const ball = new Unarmed(ballsconfig, 1);
   const ball = new Ball("unarmed", ballsconfig, 1);
   ball.addComponent(new DamageEnemyComponent(ball, ["onHit"]));
-  ball.addHitbox("empty.png", 100, 100, 0.5)
-  const ball1 = new Ball("verity", ballsconfig, 0);
+  ball.addHitbox(new Hitbox(ball, "empty.png", ball.getAtk(), 100, 100, hitboxShape.CIRCLE, 0.5));
+  const ball1 = new Ball("sword", ballsconfig, 0);
+  ball1.addHitbox(new Melee(ball1, "sword.png", ball1.getAtk(), 200, 50, 0.005, hitboxShape.RECT, 0, 0.5));
 
   gameContainer.addChild(ball);
   gameContainer.addChild(ball1);
