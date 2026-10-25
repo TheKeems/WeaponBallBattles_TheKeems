@@ -12,10 +12,18 @@ interface HComponent{
   category : string;
 }
 
+export enum hitboxShape{
+    RECT,
+    CIRCLE
+}
+
 export class Hitbox extends Sprite {
     public dmg = 0;
     public parent: Ball;
-    private iFrames: iFrame[] = [];
+    public iFrames: iFrame[] = [];
+    private shape : hitboxShape;
+    private hitbox_width;
+    private hitbox_height;
 
     constructor(
         parent: Ball,
@@ -23,17 +31,26 @@ export class Hitbox extends Sprite {
         dmg: number,
         width: number,
         height: number,
-        anchor : number
+        shape : hitboxShape,
+        anchor : number,
+        a_2 : number = -1
     ) {
         super({
             texture: Assets.get(file),
             anchor: anchor,
-            width: width,
-            height: height
         })
 
+        if(a_2 != -1){
+            //console.log("ASAS");
+            this.anchor.x = anchor;
+            this.anchor.y = a_2;
+        }
+
+        this.hitbox_width = width;
+        this.hitbox_height = height;
         this.parent = parent;
         this.dmg = dmg;
+        this.shape = shape;
     }
 
     update(deltams: number, appBounds: appBounds, collisionMatrix: Ball[][][]) {
@@ -71,11 +88,14 @@ export class Hitbox extends Sprite {
     }
 
     checkHit(other: Ball): boolean {
-        const dx = other.x - this.x;
-        const dy = other.y - this.y;
-        const dist = Math.hypot(dx, dy);
-        const minDist = 51 * this.parent.scl + 51 * other.scl;
-        return (dist < minDist);
+        if(this.shape === hitboxShape.CIRCLE){
+            const dx = other.x - this.x;
+            const dy = other.y - this.y;
+            const dist = Math.hypot(dx, dy);
+            const minDist = this.width/2 * this.parent.scl + this.width/2 * other.scl;
+            return (dist < minDist);
+        }
+        return false;
     }
 
     dealDamage(other: Ball) {
@@ -90,6 +110,10 @@ export class Hitbox extends Sprite {
             this.parent.dealDamage(other);
             this.iFrames.push({ origin: other, duration: 100 });
         }
+    }
+
+    getiFrames(){
+        return this.iFrames;
     }
 
 }
