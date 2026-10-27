@@ -21,6 +21,7 @@ export class Hitbox extends Sprite {
     public dmg = 0;
     public par: Ball;
     public iFrames: iFrame[] = [];
+    public active : boolean;
     private shape: hitboxShape;
     private hitbox_width;
     private hitbox_height;
@@ -32,6 +33,7 @@ export class Hitbox extends Sprite {
         width: number,
         height: number,
         shape: hitboxShape,
+        active : boolean,
         anchor: number,
         a_2: number = -1
     ) {
@@ -51,43 +53,53 @@ export class Hitbox extends Sprite {
         this.par = par;
         this.dmg = dmg;
         this.shape = shape;
+        this.active = active;
     }
 
     update(deltams: number, appBounds: appBounds, collisionMatrix: Ball[][][]) {
         for (const i of this.iFrames) {
             i.duration -= deltams;
-            console.log(deltams);
             if (i.duration <= 0) {
                 removeFromArr(this.iFrames, i);
             }
         }
 
         //const cell = collisionMatrix[Math.floor(this.x/appBounds.cell_size)][Math.floor(this.y/appBounds.cell_size)];
+        if(this.active){
+            const boundBox = this.getBoundBox(this.getCorners(this));
 
-        // for (let i = -1; i <= 1; i++) {
-        //     for (let j = -1; j <= 1; j++) {
-        //         let r = Math.floor(this.x / appBounds.cell_size) + i;
-        //         let c = Math.floor(this.y / appBounds.cell_size) + j;
-        //         if (r >= 0 && c >= 0 && r < collisionMatrix.length && c < collisionMatrix[r].length) {
-        //             for (const key of collisionMatrix[r][c]) {
-        //                 if (key.team != this.par.team && this.checkHit(key)) {
-        //                     let iframe = false;
-        //                     for (const i of this.iFrames) {
-        //                         if (i.origin === key) {
-        //                             iframe = true;
-        //                         }
-        //                     }
-        //                     if (!iframe) {
-        //                         this.dealDamage(key);
-        //                         this.iFrames.push({ origin: key, duration: 100 });
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+            //yeah forgot about hitboxes crossing cells
+
+            const r_int = Math.floor((boundBox[2].x - boundBox[0].x)/appBounds.cell_size) + 1;
+            const h_int = Math.floor((boundBox[2].y - boundBox[0].y)/appBounds.cell_size) + 1;
+            console.log(r_int, h_int);
+            for (let i = -r_int; i <= r_int; i++) {
+                for (let j = -h_int; j <= h_int; j++) {
+                    let r = Math.floor(boundBox[0].x / appBounds.cell_size) + i;
+                    let c = Math.floor(boundBox[0].y / appBounds.cell_size) + j;
+                    
+                    if (r >= 0 && c >= 0 && r < collisionMatrix.length && c < collisionMatrix[r].length) {
+                        for (const key of collisionMatrix[r][c]) {
+                            if (key.team != this.par.team && this.checkHit(key)) {
+                                let iframe = false;
+                                for (const i of this.iFrames) {
+                                    if (i.origin === key) {
+                                        iframe = true;
+                                    }
+                                }
+                                if (!iframe) {
+                                    this.dealDamage(key);
+                                    this.iFrames.push({ origin: key, duration: 100 });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
+    //fuck me reinventing the wheel
     getCorners(obj: Hitbox | Ball): Point[] {
         const w = (obj instanceof Hitbox) ? obj.hitbox_width : obj.hitbox_width;
         const h = (obj instanceof Hitbox) ? obj.hitbox_height : obj.hitbox_height;
@@ -104,6 +116,27 @@ export class Hitbox extends Sprite {
 
         return local.map(p => obj.toGlobal(p));
     };
+
+    getBoundBox(corners : Point[]) : Point[]{
+        const boundBox = [new Point(999999, 999999), new Point(999999, -1), new Point(-1, -1), new Point(-1, 999999)];
+        for (const key of corners) {
+
+            boundBox[0].x = Math.min(boundBox[0].x, key.x);
+            boundBox[0].y = Math.min(boundBox[0].y, key.y);
+
+            boundBox[1].x = Math.min(boundBox[1].x, key.x);
+            boundBox[1].y = Math.max(boundBox[1].y, key.y);
+
+            boundBox[2].x = Math.max(boundBox[2].x, key.x);
+            boundBox[2].y = Math.max(boundBox[2].y, key.y);
+
+            boundBox[3].x = Math.max(boundBox[3].x, key.x);
+            boundBox[3].y = Math.min(boundBox[3].y, key.y);
+
+        }
+
+        return boundBox;
+    }
 
     checkHit(other: Ball): boolean {
         if (this.shape === hitboxShape.CIRCLE) {

@@ -114,6 +114,7 @@ export class Ball extends Container {
     }
   }
 
+  
   move(delta: number, appBounds: appBounds, collisionMatrix: Ball[][][]) {
 
     this.x += this.velocity.x * delta;
@@ -129,8 +130,8 @@ export class Ball extends Container {
       this.cellArr = cell;
     }
 
-    for (let i = -1; i <= 1; i++) {
-      for (let j = -1; j <= 1; j++) {
+    for (let i = -1 - Math.floor(50 * this.scl/appBounds.cell_size); i <= 1 + Math.floor(50 * this.scl/appBounds.cell_size); i++) {
+      for (let j = -1 - Math.floor(50 * this.scl/appBounds.cell_size); j <= 1 + Math.floor(50 * this.scl/appBounds.cell_size); j++) {
         let r = Math.floor(this.x / appBounds.cell_size) + i;
         let c = Math.floor(this.y / appBounds.cell_size) + j;
         if (r >= 0 && c >= 0 && r < collisionMatrix.length && c < collisionMatrix[r].length) {

@@ -15,6 +15,7 @@ export class Melee extends Hitbox {
         height: number,
         spinRate : number,
         shape : hitboxShape,
+        active : boolean,
         anchor : number,
         a_2 : number = -1
     ) {
@@ -25,6 +26,7 @@ export class Melee extends Hitbox {
             width,
             height,
             shape,
+            active,
             anchor,
             a_2,
             
@@ -38,7 +40,7 @@ export class Melee extends Hitbox {
 
         super.update(deltams, appBounds, collisionMatrix);
 
-        const cell = collisionMatrix[Math.floor(this.x/appBounds.cell_size)][Math.floor(this.y/appBounds.cell_size)];
+        //const cell = collisionMatrix[Math.floor(this.x/appBounds.cell_size)][Math.floor(this.y/appBounds.cell_size)];
 
         this.rotation += this.spinRate * deltams;
 
