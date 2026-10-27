@@ -19,6 +19,7 @@ export enum hitboxShape {
 
 export class Hitbox extends Sprite {
     public dmg = 0;
+    //LIKELY NOT NEEDED
     public par: Ball;
     public iFrames: iFrame[] = [];
     public active : boolean;
@@ -72,12 +73,11 @@ export class Hitbox extends Sprite {
 
             const r_int = Math.floor((boundBox[2].x - boundBox[0].x)/appBounds.cell_size) + 1;
             const h_int = Math.floor((boundBox[2].y - boundBox[0].y)/appBounds.cell_size) + 1;
-            console.log(r_int, h_int);
+           
             for (let i = -r_int; i <= r_int; i++) {
                 for (let j = -h_int; j <= h_int; j++) {
                     let r = Math.floor(boundBox[0].x / appBounds.cell_size) + i;
                     let c = Math.floor(boundBox[0].y / appBounds.cell_size) + j;
-                    
                     if (r >= 0 && c >= 0 && r < collisionMatrix.length && c < collisionMatrix[r].length) {
                         for (const key of collisionMatrix[r][c]) {
                             if (key.team != this.par.team && this.checkHit(key)) {
@@ -89,13 +89,14 @@ export class Hitbox extends Sprite {
                                 }
                                 if (!iframe) {
                                     this.dealDamage(key);
-                                    this.iFrames.push({ origin: key, duration: 100 });
+                                    this.par.dealDamage(key);
                                 }
                             }
                         }
                     }
                 }
             }
+            //console.log(test); 
         }
     }
 
@@ -114,7 +115,11 @@ export class Hitbox extends Sprite {
             new Point(-ax * w, (1 - ay) * h),
         ];
 
-        return local.map(p => obj.toGlobal(p));
+        const space = this.par.parent;
+        if(!space){
+            return local.map(p => obj.toGlobal(p));
+        }
+        return local.map(p => space.toLocal(obj.toGlobal(p)));
     };
 
     getBoundBox(corners : Point[]) : Point[]{
@@ -196,11 +201,8 @@ export class Hitbox extends Sprite {
         }
         if (!iframe) {
             //other.takeDamage(this.par.getAtk());
-            if(this.par.name === "sword"){
-                console.log("HIT");
-            }
-            this.par.dealDamage(other);
-            this.iFrames.push({ origin: other, duration: 100 });
+            other.takeDamage(this.dmg);
+            this.iFrames.push({ origin: other, duration: 350 });
         }
     }
 

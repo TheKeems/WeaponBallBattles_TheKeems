@@ -151,7 +151,12 @@ export class Ball extends Container {
   }
 
   dealDamage(other: Ball) {
-    other.takeDamage(this.atk);
+    for (const key of this.components) {
+      if (key.categories.includes("onDamage")) {
+        key.run(other);
+      }
+    }
+    //other.takeDamage(this.atk);
   }
 
   takeDamage(damageTaken: number) {
@@ -246,8 +251,10 @@ export class Ball extends Container {
     this.velocity.y -= approachSpeed * ny;
     this.setSpeed(this.speedCap, -nx, -ny);
 
+    //this.runComponentWithTag("onCollide", other);
+
     for (const key of this.components) {
-      if (key.categories.includes("onHit")) {
+      if (key.categories.includes("onCollide")) {
         key.run(other);
       }
     }
@@ -274,6 +281,10 @@ export class Ball extends Container {
     this.atk = i;
   }
 
+  incrAtk(i: number) {
+    this.atk += i;
+  }
+
   getAtk(): number {
     return this.atk;
   }
@@ -286,6 +297,10 @@ export class Ball extends Container {
 
   addComponent(c: BComponent) {
     this.components.push(c);
+  }
+
+  runComponentWithTag(tag : string, ...params : Ball[]){
+
   }
 
   // getComponent(s : string){
@@ -309,8 +324,13 @@ export class DamageEnemyComponent implements BComponent {
   run(other: Ball) {
     if (this.parent.name === "unarmed") {
       this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y)/2);
-      this.parent.speedCap += 0.2;
+      this.parent.speedCap += 0.4;
+      this.parent.hitboxes[0].dmg = this.parent.getAtk();
+      this.parent.hitboxes[0].dealDamage(other);
     }
-    this.parent.hitboxes[0].dealDamage(other);
+    if (this.parent.name === "sword"){
+      this.parent.incrAtk(1);
+    }
+    this.parent.hitboxes[0].dmg = this.parent.getAtk();
   }
 }

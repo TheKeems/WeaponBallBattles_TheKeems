@@ -71,10 +71,11 @@ export function drawHitboxDebug(hitbox: Hitbox, ball: Ball) {
 
   //const ball = new Unarmed(ballsconfig, 1);
   const ball = new Ball("unarmed", ballsconfig, 1);
-  ball.addComponent(new DamageEnemyComponent(ball, ["onHit"]));
+  ball.addComponent(new DamageEnemyComponent(ball, ["onCollide"]));
   ball.addHitbox(new Hitbox(ball, "empty.png", ball.getAtk(), 0, 0, hitboxShape.CIRCLE, false, 0.5));
   const ball1 = new Ball("sword", ballsconfig, 0);
-  ball1.addHitbox(new Melee(ball1, "sword.png", ball1.getAtk(), 225, 65, 0.005, hitboxShape.RECT, true, -0.1, 0.5));
+  ball1.addHitbox(new Melee(ball1, "sword.png", ball1.getAtk(), 225, 6, 0.005, hitboxShape.RECT, true, -0.1, 0.5));
+  ball1.addComponent(new DamageEnemyComponent(ball1, ["onDamage"]));
 
   gameContainer.addChild(ball);
   gameContainer.addChild(ball1);
@@ -109,7 +110,7 @@ export function drawHitboxDebug(hitbox: Hitbox, ball: Ball) {
       ball.update(ticker.deltaTime, appBounds, ticker.deltaMS, collisionMatrix);
       ball1.update(ticker.deltaTime, appBounds, ticker.deltaMS, collisionMatrix);
       debugGfx.clear();
-      drawHitboxDebug(ball1.hitboxes[0], ball);
+      //drawHitboxDebug(ball1.hitboxes[0], ball);
       
     }
   });
