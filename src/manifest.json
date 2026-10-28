@@ -54,23 +54,6 @@
         },
         {
           "alias": [
-            "main/sword.png",
-            "sword.png"
-          ],
-          "src": [
-            "main/sword@0.5x.webp",
-            "main/sword@0.5x.png",
-            "main/sword.webp",
-            "main/sword.png"
-          ],
-          "data": {
-            "tags": {
-              "m": true
-            }
-          }
-        },
-        {
-          "alias": [
             "main/unarmed.svg",
             "unarmed.svg"
           ],
@@ -93,6 +76,23 @@
             "main/verity@0.5x.png",
             "main/verity.webp",
             "main/verity.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/sword.png",
+            "sword.png"
+          ],
+          "src": [
+            "main/sword@0.5x.webp",
+            "main/sword@0.5x.png",
+            "main/sword.webp",
+            "main/sword.png"
           ],
           "data": {
             "tags": {

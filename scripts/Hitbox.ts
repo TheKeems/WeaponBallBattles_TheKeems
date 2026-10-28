@@ -24,8 +24,8 @@ export class Hitbox extends Sprite {
     public iFrames: iFrame[] = [];
     public active : boolean;
     private shape: hitboxShape;
-    private hitbox_width;
-    private hitbox_height;
+    public hitbox_width;
+    public hitbox_height;
 
     constructor(
         par: Ball,
@@ -36,14 +36,14 @@ export class Hitbox extends Sprite {
         shape: hitboxShape,
         active : boolean,
         anchor: number,
-        a_2: number = -1
+        a_2 ?: number
     ) {
         super({
             texture: Assets.get(file),
             anchor: anchor,
         })
 
-        if (a_2 != -1) {
+        if (a_2) {
             //console.log("ASAS");
             this.anchor.x = anchor;
             this.anchor.y = a_2;

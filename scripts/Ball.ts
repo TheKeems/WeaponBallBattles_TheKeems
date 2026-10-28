@@ -1,5 +1,5 @@
 import { Assets, Sprite, Text, Container, ColorMatrixFilter, ColorSource } from "pixi.js";
-import { removeFromArr, randInt, appBounds, setTimeflow } from "../src/main";
+import { removeFromArr, randInt, appBounds, setTimeflow, ballsconfig } from "../src/main";
 import { Hitbox, hitboxShape } from "../scripts/index";
 
 export interface Velocity {
@@ -44,7 +44,6 @@ export class Ball extends Container {
 
   constructor(
     ballType: string,
-    ballsconfig: Record<string, BallConfig>,
     team: number = 0,
     health: number = 100
   ) {
@@ -324,7 +323,7 @@ export class DamageEnemyComponent implements BComponent {
   run(other: Ball) {
     if (this.parent.name === "unarmed") {
       this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y)/2);
-      this.parent.speedCap += 0.4;
+      this.parent.speedCap += 0.5;
       this.parent.hitboxes[0].dmg = this.parent.getAtk();
       this.parent.hitboxes[0].dealDamage(other);
     }

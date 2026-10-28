@@ -1,6 +1,7 @@
 import { Application, Assets, Graphics, Container } from "pixi.js";
 import manifest from "./manifest.json";
 import { Ball, BallConfig, hitboxShape, Hitbox, Melee, DamageEnemyComponent} from "../scripts/index";
+import {hitboxthatdoesnothing} from "../scripts/hitboxthatdoesnothing";
 
 const BORDER_PADDING = 40;
 const BORDER_WIDTH = 4;
@@ -32,22 +33,23 @@ export function randInt(min : number, max : number) : number {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-let ballsconfig: Record<string, BallConfig>;
+export let ballsconfig: Record<string, BallConfig>;
 
 export const debugGfx = new Graphics();
 
 
-export function drawHitboxDebug(hitbox: Hitbox, ball: Ball) {
+export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: Ball) {
     //const a = hitbox.getBoundBox(hitbox.getCorners(hitbox)).flatMap(p => [p.x, p.y]);
     const a = hitbox.getCorners(hitbox).flatMap(p => [p.x, p.y]);
-    const b = hitbox.getCorners(ball).flatMap(p => [p.x, p.y]);
-    const hit = hitbox.checkHit(ball);
+    //const b = hitbox.getCorners(ball).flatMap(p => [p.x, p.y]);
+    //const hit = hitbox.checkHit(ball);
+    const hit = false;
 
     debugGfx
         .poly(a)
         .stroke({ width: 2, color: hit ? 0xff0000 : 0x00ff00 })
-        .poly(b)
-        .stroke({ width: 2, color: hit ? 0xff0000 : 0x00aaff });
+        // .poly(b)
+        // .stroke({ width: 2, color: hit ? 0xff0000 : 0x00aaff });
 }
 
 (async () => {
@@ -70,15 +72,18 @@ export function drawHitboxDebug(hitbox: Hitbox, ball: Ball) {
   gameContainer.addChild(border);
 
   //const ball = new Unarmed(ballsconfig, 1);
-  const ball = new Ball("unarmed", ballsconfig, 1);
+  const ball = new Ball("unarmed", 1);
   ball.addComponent(new DamageEnemyComponent(ball, ["onCollide"]));
   ball.addHitbox(new Hitbox(ball, "empty.png", ball.getAtk(), 0, 0, hitboxShape.CIRCLE, false, 0.5));
-  const ball1 = new Ball("sword", ballsconfig, 0);
-  ball1.addHitbox(new Melee(ball1, "sword.png", ball1.getAtk(), 225, 6, 0.005, hitboxShape.RECT, true, -0.1, 0.5));
+  const ball1 = new Ball("sword", 0);
+  ball1.addHitbox(new Melee(ball1, "sword.png", ball1.getAtk(), 150, 35, 0.005, hitboxShape.RECT, true, -0.1, 0.5));
   ball1.addComponent(new DamageEnemyComponent(ball1, ["onDamage"]));
+
+  const testbox = new hitboxthatdoesnothing(100, 100, "sword2.png", 150, 35, hitboxShape.RECT, -0.1, 0.5);
 
   gameContainer.addChild(ball);
   gameContainer.addChild(ball1);
+  //gameContainer.addChild(testbox);
 
   const appBounds: appBounds = { left: 0, top: 0, right: 0, bottom: 0, width: GAME_WIDTH, height: GAME_HEIGHT, cell_size: CELL_SIZE};
 
@@ -110,7 +115,7 @@ export function drawHitboxDebug(hitbox: Hitbox, ball: Ball) {
       ball.update(ticker.deltaTime, appBounds, ticker.deltaMS, collisionMatrix);
       ball1.update(ticker.deltaTime, appBounds, ticker.deltaMS, collisionMatrix);
       debugGfx.clear();
-      //drawHitboxDebug(ball1.hitboxes[0], ball);
+      //drawHitboxDebug(testbox);
       
     }
   });

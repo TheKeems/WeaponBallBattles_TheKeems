@@ -1,4 +1,11 @@
 {
+    "test" : {
+        "title" : "test",
+        "file" : "empty.png",
+        "atk" : 1,
+        "scl" : 1,
+        "speedCap" : 8
+    },
     "verity" : {
         "title" : "Verity",
         "file" : "verity.png",
