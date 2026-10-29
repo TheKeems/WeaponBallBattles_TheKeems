@@ -9,7 +9,7 @@ const GAME_HEIGHT = 600;
 const GAME_WIDTH = 600;
 const CELL_SIZE = GAME_HEIGHT/5;
 let timeFlow = true;
-let collisionMatrix : Ball[][][] = [[[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []]];
+export let collisionMatrix : Ball[][][] = [[[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []]];
 
 export interface appBounds {
   left: number;
@@ -33,10 +33,18 @@ export function randInt(min : number, max : number) : number {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+const app = new Application();
+const gameContainer = new Container();
 export let ballsconfig: Record<string, BallConfig>;
 export let gameBounds: appBounds;
 export const debugGfx = new Graphics();
+export const balls : Ball[] = [];
 
+export function addBall(name : string, team? : number, health? : number){
+  const b = new Ball(name, team, health);
+  balls.push(b);
+  gameContainer.addChild(b);  
+}
 
 export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: Ball) {
     //const a = hitbox.getBoundBox(hitbox.getCorners(hitbox)).flatMap(p => [p.x, p.y]);
@@ -53,7 +61,6 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
 }
 
 (async () => {
-  const app = new Application();
   await app.init({
     background: "#ffffff",
     resizeTo: window,
@@ -61,7 +68,6 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
   });
   document.getElementById("pixi-container")!.appendChild(app.canvas);
 
-  const gameContainer = new Container();
   app.stage.addChild(gameContainer);
 
   await Assets.init({ manifest, basePath: "assets" });
@@ -90,30 +96,23 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
       .stroke({ width: BORDER_WIDTH, color: 0x000000 });
   };
 
-  const ball = new Ball("unarmed", 1, 500);
-  //const verity = new Ball("verity", 2, 500);
-  const ball1 = new Ball("sword", 0, 500);
+  addBall("unarmed", 1, 100);
+  addBall("sword", 0, 100);
 
   //const testbox = new hitboxthatdoesnothing(100, 100, "empty.png", 150, 35, hitboxShape.RECT, -0.1, 0.5);
-
-  gameContainer.addChild(ball);
-  gameContainer.addChild(ball1);
-  //gameContainer.addChild(verity);
+  //^ DO NOT DELETE USED FOR TESTING
 
   layout();
-  ball.position.set(GAME_WIDTH / 2, GAME_HEIGHT / 2);
-  ball1.position.set(GAME_WIDTH / 4, GAME_HEIGHT / 4);
 
   app.stage.addChild(debugGfx);
 
   app.ticker.add((ticker) => {
     if(timeFlow){
-      ball.update(ticker.deltaTime, gameBounds, ticker.deltaMS, collisionMatrix);
-      ball1.update(ticker.deltaTime, gameBounds, ticker.deltaMS, collisionMatrix);
-      //verity.update(ticker.deltaTime, gameBounds, ticker.deltaMS, collisionMatrix);
       debugGfx.clear();
       //drawHitboxDebug(testbox);
-      
+      for (const key of balls) {
+        key.update(ticker.deltaTime, ticker.deltaMS);        
+      }
     }
   });
 

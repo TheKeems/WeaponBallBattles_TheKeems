@@ -1,7 +1,7 @@
-import { Assets, Sprite, Container } from "pixi.js";
-import { removeFromArr, randInt, appBounds } from "../src/main";
+// import { Assets, Sprite, Container } from "pixi.js";
+// import { removeFromArr, randInt, appBounds } from "../src/main";
 import { Ball } from "./Ball";
-import { Hitbox , iFrame, hitboxShape} from "./Hitbox";
+import { Hitbox , hitboxShape} from "./Hitbox";
 
 
 export class Melee extends Hitbox {
@@ -36,9 +36,9 @@ export class Melee extends Hitbox {
 
     }
 
-    update(deltams: number, appBounds: appBounds, collisionMatrix: Ball[][][]) {
+    update(deltams: number) {
 
-        super.update(deltams, appBounds, collisionMatrix);
+        super.update(deltams);
 
         //const cell = collisionMatrix[Math.floor(this.x/appBounds.cell_size)][Math.floor(this.y/appBounds.cell_size)];
         if(this.active){

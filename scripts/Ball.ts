@@ -1,5 +1,5 @@
 import { Assets, Sprite, Text, Container, ColorMatrixFilter, ColorSource } from "pixi.js";
-import { removeFromArr, randInt, appBounds, setTimeflow, ballsconfig, gameBounds } from "../src/main";
+import { removeFromArr, randInt, setTimeflow, ballsconfig, gameBounds, collisionMatrix } from "../src/main";
 import { Hitbox, Melee } from "../scripts/index";
 
 export interface Velocity {
@@ -55,9 +55,6 @@ export class collisionComponent implements BComponent {
   }
 
   run(other: Ball) {
-    if (this.parent.name === "unarmed") {
-      
-    }
     this.parent.hitboxes[0].dealDamage(other);
   }
 }
@@ -71,9 +68,12 @@ export class PreDamageComponent implements BComponent {
   }
 
   run(other?: Ball) {
-    if (this.parent.name === "unarmed") {
-      this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y));
-      this.parent.hitboxes[0].dmg = this.parent.getAtk();
+    switch(this.parent.name){
+      case "unarmed":{
+        this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y) / 2);
+        this.parent.hitboxes[0].dmg = this.parent.getAtk();
+        break;
+      }
     }
   }
 }
@@ -87,12 +87,15 @@ export class scaleComponent implements BComponent {
   }
 
   run(other?: Ball) {
-    if (this.parent.name === "unarmed") {
-      this.parent.speedCap += 1.0;
-    }
-    if (this.parent.name === "sword") {
-      this.parent.incrAtk(1);
-      this.parent.hitboxes[0].dmg = this.parent.getAtk();
+    switch(this.parent.name){
+      case "unarmed":{
+        this.parent.speedCap += 0.3;
+        break;
+      }
+      case "sword" : {
+        this.parent.incrAtk(1);
+        this.parent.hitboxes[0].dmg = this.parent.getAtk();
+      }
     }
   }
 }
@@ -214,7 +217,7 @@ export class Ball extends Container {
     return texture;
   }
 
-  update(delta: number, appBounds: appBounds, deltams: number, collisionMatrix: Ball[][][]) {
+  update(delta: number, deltams: number) {
     //ON DEATH
     if (this.health <= 0) {
       this.removeFromParent();
@@ -222,20 +225,20 @@ export class Ball extends Container {
       return;
     }
 
-    this.move(delta, appBounds, collisionMatrix);
+    this.move(delta);
     for (const key of this.hitboxes) {
-      key.update(deltams, appBounds, collisionMatrix);
+      key.update(deltams);
     }
   }
 
 
-  move(delta: number, appBounds: appBounds, collisionMatrix: Ball[][][]) {
+  move(delta: number) {
 
     this.x += this.velocity.x * delta;
     this.y += this.velocity.y * delta;
 
     //well apparently my collision matrix is buggy ash so ig ill do ts
-    const cell = collisionMatrix[Math.floor(this.x / appBounds.cell_size)][Math.floor(this.y / appBounds.cell_size)];
+    const cell = collisionMatrix[Math.floor(this.x / gameBounds.cell_size)][Math.floor(this.y / gameBounds.cell_size)];
     if (cell !== this.cellArr) {
       if (this.cellArr) {
         removeFromArr(this.cellArr, this);
@@ -244,10 +247,10 @@ export class Ball extends Container {
       this.cellArr = cell;
     }
 
-    for (let i = -1 - Math.floor(50 * this.scl / appBounds.cell_size); i <= 1 + Math.floor(50 * this.scl / appBounds.cell_size); i++) {
-      for (let j = -1 - Math.floor(50 * this.scl / appBounds.cell_size); j <= 1 + Math.floor(50 * this.scl / appBounds.cell_size); j++) {
-        let r = Math.floor(this.x / appBounds.cell_size) + i;
-        let c = Math.floor(this.y / appBounds.cell_size) + j;
+    for (let i = -1 - Math.floor(50 * this.scl / gameBounds.cell_size); i <= 1 + Math.floor(50 * this.scl / gameBounds.cell_size); i++) {
+      for (let j = -1 - Math.floor(50 * this.scl / gameBounds.cell_size); j <= 1 + Math.floor(50 * this.scl / gameBounds.cell_size); j++) {
+        let r = Math.floor(this.x / gameBounds.cell_size) + i;
+        let c = Math.floor(this.y / gameBounds.cell_size) + j;
         if (r >= 0 && c >= 0 && r < collisionMatrix.length && c < collisionMatrix[r].length) {
           for (const key of collisionMatrix[r][c]) {
             if (key != this) {
@@ -258,7 +261,7 @@ export class Ball extends Container {
       }
     }
 
-    this.collideWithBorder(appBounds, delta);
+    this.collideWithBorder(delta);
 
     this.velocity.y += 0.2 * delta;
 
@@ -270,6 +273,7 @@ export class Ball extends Container {
         key.run(other);
       }
     }
+
     //other.takeDamage(this.atk);
   }
 
@@ -301,36 +305,36 @@ export class Ball extends Container {
     return (dx * dx + dy * dy) < (this.scl * 50 * this.scl * 50);
   }
 
-  collideWithBorder(appBounds: appBounds, delta: number) {
+  collideWithBorder(delta: number) {
     const hw = (100 * this.scl) / 2;
     const hh = (100 * this.scl) / 2;
 
-    if (this.x - hw <= appBounds.left) {
-      this.x = appBounds.left + hw;
+    if (this.x - hw <= gameBounds.left) {
+      this.x = gameBounds.left + hw;
       this.velocity.x = Math.abs(this.velocity.x);
       if (Math.abs(this.velocity.x) <= this.speedCap/2) {
-        this.velocity.x += this.speedCap/2 * delta;
+        this.velocity.x += this.speedCap/2;
       }
-    } else if (this.x + hw >= appBounds.right) {
-      this.x = appBounds.right - hw;
+    } else if (this.x + hw >= gameBounds.right) {
+      this.x = gameBounds.right - hw;
       this.velocity.x = -Math.abs(this.velocity.x);
       if (Math.abs(this.velocity.x) <= this.speedCap/2) {
-        this.velocity.x -= this.speedCap/2 * delta;
+        this.velocity.x -= this.speedCap/2;
       }
     }
 
-    if (this.y - hh <= appBounds.top) {
-      this.y = appBounds.top + hh;
+    if (this.y - hh <= gameBounds.top) {
+      this.y = gameBounds.top + hh;
       this.velocity.y = Math.abs(this.velocity.y);
-    } else if (this.y + hh >= appBounds.bottom) {
-      this.y = appBounds.bottom - hh;
+    } else if (this.y + hh >= gameBounds.bottom) {
+      this.y = gameBounds.bottom - hh;
 
       this.velocity.y = -Math.abs(this.velocity.y);
       if (this.velocity.y > -10) {
-        this.velocity.y -= this.speedCap/2 * delta;
+        this.velocity.y -= this.speedCap/2;
       }
-      if (Math.abs(this.velocity.x) <= this.speedCap/4) {
-        this.velocity.x += randInt(-1, 1) * this.speedCap * delta;
+      if (Math.abs(this.velocity.x) <= this.speedCap/2) {
+        this.velocity.x += randInt(-1, 1) * this.speedCap;
       }
     }
   }

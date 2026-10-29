@@ -1,11 +1,12 @@
-import { Assets, Sprite, Container, Point } from "pixi.js";
-import { removeFromArr, randInt, appBounds } from "../src/main";
+import { Assets, Sprite, Point } from "pixi.js";
+import { removeFromArr, randInt, gameBounds, collisionMatrix } from "../src/main";
 import { Ball } from "./Ball";
 
 
 export interface iFrame {
-    origin: Container;
+    origin: Ball;
     duration: number;
+    touch : boolean
 }
 
 interface HComponent {
@@ -57,27 +58,27 @@ export class Hitbox extends Sprite {
         this.active = active;
     }
 
-    update(deltams: number, appBounds: appBounds, collisionMatrix: Ball[][][]) {
+    update(deltams: number) {
         for (const i of this.iFrames) {
             i.duration -= deltams;
-            if (i.duration <= 0) {
+            if (i.touch != this.checkHit(i.origin) && i.duration <= 0) {
                 removeFromArr(this.iFrames, i);
             }
         }
         
-        //const cell = collisionMatrix[Math.floor(this.x/appBounds.cell_size)][Math.floor(this.y/appBounds.cell_size)];
+        //const cell = collisionMatrix[Math.floor(this.x/gameBounds.cell_size)][Math.floor(this.y/gameBounds.cell_size)];
         if(this.active){
             const boundBox = this.getBoundBox(this.getCorners(this));
 
             //yeah forgot about hitboxes crossing cells
 
-            const r_int = Math.floor((boundBox[2].x - boundBox[0].x)/appBounds.cell_size) + 1;
-            const h_int = Math.floor((boundBox[2].y - boundBox[0].y)/appBounds.cell_size) + 1;
+            const r_int = Math.floor((boundBox[2].x - boundBox[0].x)/gameBounds.cell_size) + 1;
+            const h_int = Math.floor((boundBox[2].y - boundBox[0].y)/gameBounds.cell_size) + 1;
            
             for (let i = -r_int; i <= r_int; i++) {
                 for (let j = -h_int; j <= h_int; j++) {
-                    let r = Math.floor(boundBox[0].x / appBounds.cell_size) + i;
-                    let c = Math.floor(boundBox[0].y / appBounds.cell_size) + j;
+                    let r = Math.floor(boundBox[0].x / gameBounds.cell_size) + i;
+                    let c = Math.floor(boundBox[0].y / gameBounds.cell_size) + j;
                     if (r >= 0 && c >= 0 && r < collisionMatrix.length && c < collisionMatrix[r].length) {
                         for (const key of collisionMatrix[r][c]) {
                             if (key.team != this.par.team && this.checkHit(key)) {
@@ -89,7 +90,6 @@ export class Hitbox extends Sprite {
                                 }
                                 if (!iframe) {
                                     this.dealDamage(key);
-                                    this.par.dealDamage(key);
                                 }
                             }
                         }
@@ -204,14 +204,13 @@ export class Hitbox extends Sprite {
             //other.takeDamage(this.par.getAtk());
             this.par.preDamage(other);
             other.takeDamage(this.dmg);
-            this.iFrames.push({ origin: other, duration: 350 });
+            this.iFrames.push({ origin: other, duration: 50, touch : true });
+            this.par.dealDamage(other);
         }
     }
 
     getiFrames() {
         return this.iFrames;
     }
-
-
 
 }
