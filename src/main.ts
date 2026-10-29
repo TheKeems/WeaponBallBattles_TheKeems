@@ -74,12 +74,13 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
   //const ball = new Unarmed(ballsconfig, 1);
   const ball = new Ball("unarmed", 1);
   ball.addComponent(new DamageEnemyComponent(ball, ["onCollide"]));
-  ball.addHitbox(new Hitbox(ball, "empty.png", ball.getAtk(), 0, 0, hitboxShape.CIRCLE, false, 0.5));
+  //ball.addHitbox(new Hitbox(ball, "empty.png", ball.getAtk(), 0, 0, hitboxShape.CIRCLE, false, 0.5));
+
   const ball1 = new Ball("sword", 0);
   ball1.addHitbox(new Melee(ball1, "sword.png", ball1.getAtk(), 150, 35, 0.005, hitboxShape.RECT, true, -0.1, 0.5));
   ball1.addComponent(new DamageEnemyComponent(ball1, ["onDamage"]));
 
-  const testbox = new hitboxthatdoesnothing(100, 100, "sword2.png", 150, 35, hitboxShape.RECT, -0.1, 0.5);
+  //const testbox = new hitboxthatdoesnothing(100, 100, "empty.png", 150, 35, hitboxShape.RECT, -0.1, 0.5);
 
   gameContainer.addChild(ball);
   gameContainer.addChild(ball1);

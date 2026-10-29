@@ -36,17 +36,17 @@ export class Hitbox extends Sprite {
         shape: hitboxShape,
         active : boolean,
         anchor: number,
-        a_2 ?: number
+        anchor_y ?: number
     ) {
         super({
             texture: Assets.get(file),
             anchor: anchor,
         })
 
-        if (a_2) {
+        if (anchor_y) {
             //console.log("ASAS");
             this.anchor.x = anchor;
-            this.anchor.y = a_2;
+            this.anchor.y = anchor_y;
         }
 
         this.hitbox_width = width;

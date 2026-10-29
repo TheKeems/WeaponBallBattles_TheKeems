@@ -19,6 +19,24 @@
         "atk" : 1,
         "scl" : 1,
         "speedCap" : 8,
+        "components": [{
+            "DamageEnemy" : {
+                "name" : "DamageEnemyComponent",
+                "tags" : ["onCollide"]
+            }
+        }],
+        "hitboxes" : [{
+            "type" : "melee",
+            "file" : "empty.png",
+            "dmg" : 1 ,
+            "width" : 150,
+            "height" : 35,
+            "shape" : "rect",
+            "active" : false,
+            "anchor_x" : -0.1,
+            "anchor_y" : 0.5
+
+        }],
         "displayedStats" : {
             "Health" : 100,
             "Current Speed" : 0,
@@ -38,19 +56,5 @@
             "Max Speed" : 0
         },
         "tint" : "#FF7F7F"
-    },
-    "crimsongod" : {
-        "title" : "The Crimson God",
-        "file" : "unarmed.svg",
-        "atk" : 1,
-        "scl" : 1,
-        "speedCap" : 8
-    },
-    "chainref" : {
-        "title" : "Chain Refractor",
-        "file" : "unarmed.svg",
-        "atk" : 1,
-        "scl" : 1,
-        "speedCap" : 8
     }
 }
