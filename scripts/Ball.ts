@@ -1,5 +1,5 @@
 import { Assets, Sprite, Text, Container, ColorMatrixFilter, ColorSource } from "pixi.js";
-import { removeFromArr, randInt, appBounds, setTimeflow, ballsconfig } from "../src/main";
+import { removeFromArr, randInt, appBounds, setTimeflow, ballsconfig, gameBounds } from "../src/main";
 import { Hitbox, Melee } from "../scripts/index";
 
 export interface Velocity {
@@ -56,8 +56,9 @@ export class collisionComponent implements BComponent {
 
   run(other: Ball) {
     if (this.parent.name === "unarmed") {
-      this.parent.hitboxes[0].dealDamage(other);
+      
     }
+    this.parent.hitboxes[0].dealDamage(other);
   }
 }
 
@@ -71,7 +72,7 @@ export class PreDamageComponent implements BComponent {
 
   run(other?: Ball) {
     if (this.parent.name === "unarmed") {
-      this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y) / 2);
+      this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y));
       this.parent.hitboxes[0].dmg = this.parent.getAtk();
     }
   }
@@ -87,7 +88,7 @@ export class scaleComponent implements BComponent {
 
   run(other?: Ball) {
     if (this.parent.name === "unarmed") {
-      this.parent.speedCap += 0.2;
+      this.parent.speedCap += 1.0;
     }
     if (this.parent.name === "sword") {
       this.parent.incrAtk(1);
@@ -166,6 +167,10 @@ export class Ball extends Container {
     const angle = Math.random() * Math.PI * 2;
     this.velocity = { x: Math.cos(angle) * speedCap, y: Math.sin(angle) * speedCap };
 
+    this.x = randInt(100, gameBounds.width - 100);
+    this.y = randInt(100, gameBounds.height - 100);
+
+    
     if (hitboxes) {
       for (const key of ballsconfig[ballType].hitboxes) {
         switch(key.type){
@@ -303,14 +308,14 @@ export class Ball extends Container {
     if (this.x - hw <= appBounds.left) {
       this.x = appBounds.left + hw;
       this.velocity.x = Math.abs(this.velocity.x);
-      if (Math.abs(this.velocity.x) <= 3) {
-        this.velocity.x += 3 * delta;
+      if (Math.abs(this.velocity.x) <= this.speedCap/2) {
+        this.velocity.x += this.speedCap/2 * delta;
       }
     } else if (this.x + hw >= appBounds.right) {
       this.x = appBounds.right - hw;
       this.velocity.x = -Math.abs(this.velocity.x);
-      if (Math.abs(this.velocity.x) <= 3) {
-        this.velocity.x -= 3 * delta;
+      if (Math.abs(this.velocity.x) <= this.speedCap/2) {
+        this.velocity.x -= this.speedCap/2 * delta;
       }
     }
 
@@ -322,9 +327,9 @@ export class Ball extends Container {
 
       this.velocity.y = -Math.abs(this.velocity.y);
       if (this.velocity.y > -10) {
-        this.velocity.y -= 3 * delta;
+        this.velocity.y -= this.speedCap/2 * delta;
       }
-      if (Math.abs(this.velocity.x) <= 3) {
+      if (Math.abs(this.velocity.x) <= this.speedCap/4) {
         this.velocity.x += randInt(-1, 1) * this.speedCap * delta;
       }
     }

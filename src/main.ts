@@ -1,6 +1,6 @@
 import { Application, Assets, Graphics, Container } from "pixi.js";
 import manifest from "./manifest.json";
-import { Ball, BallConfig, hitboxShape, Hitbox, Melee, scaleComponent} from "../scripts/index";
+import { Ball, BallConfig, Hitbox } from "../scripts/index";
 import {hitboxthatdoesnothing} from "../scripts/hitboxthatdoesnothing";
 
 const BORDER_PADDING = 40;
@@ -34,7 +34,7 @@ export function randInt(min : number, max : number) : number {
 }
 
 export let ballsconfig: Record<string, BallConfig>;
-
+export let gameBounds: appBounds;
 export const debugGfx = new Graphics();
 
 
@@ -71,28 +71,13 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
   const border = new Graphics();
   gameContainer.addChild(border);
 
-  //const ball = new Unarmed(ballsconfig, 1);
-  const ball = new Ball("unarmed", 1);
-  //ball.addComponent(new DamageEnemyComponent(ball, ["onCollide"]));
-  //ball.addHitbox(new Hitbox(ball, "empty.png", ball.getAtk(), 0, 0, hitboxShape.CIRCLE, false, 0.5));
-
-  const ball1 = new Ball("sword", 0);
-  //ball1.addHitbox(new Melee(ball1, "main/sword/sword.png", ball1.getAtk(), 150, 35, 0.005, hitboxShape.RECT, true, -0.1, 0.5));
-  //ball1.addComponent(new scaleComponent(ball1, ["onDamage"]));
-
-  //const testbox = new hitboxthatdoesnothing(100, 100, "empty.png", 150, 35, hitboxShape.RECT, -0.1, 0.5);
-
-  gameContainer.addChild(ball);
-  gameContainer.addChild(ball1);
-  //gameContainer.addChild(testbox);
-
-  const appBounds: appBounds = { left: 0, top: 0, right: 0, bottom: 0, width: GAME_WIDTH, height: GAME_HEIGHT, cell_size: CELL_SIZE};
+  gameBounds = { left: 0, top: 0, right: 0, bottom: 0, width: GAME_WIDTH, height: GAME_HEIGHT, cell_size: CELL_SIZE};
 
   const layout = () => {
-    appBounds.left = BORDER_PADDING + BORDER_WIDTH / 2;
-    appBounds.top = BORDER_PADDING + BORDER_WIDTH / 2;
-    appBounds.right = GAME_WIDTH - BORDER_PADDING - BORDER_WIDTH / 2;
-    appBounds.bottom = GAME_HEIGHT - BORDER_PADDING - BORDER_WIDTH / 2;
+    gameBounds.left = BORDER_PADDING + BORDER_WIDTH / 2;
+    gameBounds.top = BORDER_PADDING + BORDER_WIDTH / 2;
+    gameBounds.right = GAME_WIDTH - BORDER_PADDING - BORDER_WIDTH / 2;
+    gameBounds.bottom = GAME_HEIGHT - BORDER_PADDING - BORDER_WIDTH / 2;
 
     border
       .clear()
@@ -105,6 +90,16 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
       .stroke({ width: BORDER_WIDTH, color: 0x000000 });
   };
 
+  const ball = new Ball("unarmed", 1, 500);
+  //const verity = new Ball("verity", 2, 500);
+  const ball1 = new Ball("sword", 0, 500);
+
+  //const testbox = new hitboxthatdoesnothing(100, 100, "empty.png", 150, 35, hitboxShape.RECT, -0.1, 0.5);
+
+  gameContainer.addChild(ball);
+  gameContainer.addChild(ball1);
+  //gameContainer.addChild(verity);
+
   layout();
   ball.position.set(GAME_WIDTH / 2, GAME_HEIGHT / 2);
   ball1.position.set(GAME_WIDTH / 4, GAME_HEIGHT / 4);
@@ -113,8 +108,9 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
 
   app.ticker.add((ticker) => {
     if(timeFlow){
-      ball.update(ticker.deltaTime, appBounds, ticker.deltaMS, collisionMatrix);
-      ball1.update(ticker.deltaTime, appBounds, ticker.deltaMS, collisionMatrix);
+      ball.update(ticker.deltaTime, gameBounds, ticker.deltaMS, collisionMatrix);
+      ball1.update(ticker.deltaTime, gameBounds, ticker.deltaMS, collisionMatrix);
+      //verity.update(ticker.deltaTime, gameBounds, ticker.deltaMS, collisionMatrix);
       debugGfx.clear();
       //drawHitboxDebug(testbox);
       
