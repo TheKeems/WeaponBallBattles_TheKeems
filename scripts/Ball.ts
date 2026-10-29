@@ -1,6 +1,6 @@
 import { Assets, Sprite, Text, Container, ColorMatrixFilter, ColorSource } from "pixi.js";
 import { removeFromArr, randInt, appBounds, setTimeflow, ballsconfig } from "../src/main";
-import { Hitbox, hitboxShape } from "../scripts/index";
+import { Hitbox } from "../scripts/index";
 
 export interface Velocity {
   x: number;
@@ -13,8 +13,7 @@ export interface BallConfig {
   atk: number;
   scl: number;
   speedCap: number;
-  components: [
-    DamageEnemy : {
+  components: [{
       name : string,
       tags: string[]
     }
@@ -57,7 +56,7 @@ export class DamageEnemyComponent implements BComponent {
   run(other: Ball) {
     if (this.parent.name === "unarmed") {
       this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y) / 2);
-      this.parent.speedCap += 0.5;
+      this.parent.speedCap += 0.2;
       this.parent.hitboxes[0].dmg = this.parent.getAtk();
       this.parent.hitboxes[0].dealDamage(other);
     }
@@ -66,10 +65,6 @@ export class DamageEnemyComponent implements BComponent {
     }
     this.parent.hitboxes[0].dmg = this.parent.getAtk();
   }
-}
-
-const compConv : Record<string, new (...args: any[]) => any> = {
-  "DamageEnemyComponent" : DamageEnemyComponent
 }
 
 
@@ -143,17 +138,16 @@ export class Ball extends Container {
     this.velocity = { x: Math.cos(angle) * speedCap, y: Math.sin(angle) * speedCap };
 
     if (hitboxes) {
-      //console.log(ballsconfig[ballType].hitboxes[0].shape);
       for (const key of ballsconfig[ballType].hitboxes) {
         this.addHitbox(new Hitbox(this, key.file, key.dmg, key.width, key.height, shapeConv[key.shape], key.active, key.anchor_x, key.anchor_y));
       }
     }
 
     if(components){
-      console.log(ballsconfig[ballType].components);
       for (const key of ballsconfig[ballType].components) {
         switch(key.name){
           case "DamageEnemyComponent":
+            console.log("ADDED");
             this.addComponent(new DamageEnemyComponent(this, key.tags));
         }
       }

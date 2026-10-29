@@ -20,10 +20,8 @@
         "scl" : 1,
         "speedCap" : 8,
         "components": [{
-            "DamageEnemy" : {
-                "name" : "DamageEnemyComponent",
-                "tags" : ["onCollide"]
-            }
+            "name" : "DamageEnemyComponent",
+            "tags" : ["onCollide"]
         }],
         "hitboxes" : [{
             "type" : "melee",

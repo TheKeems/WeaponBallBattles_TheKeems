@@ -73,7 +73,7 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
 
   //const ball = new Unarmed(ballsconfig, 1);
   const ball = new Ball("unarmed", 1);
-  ball.addComponent(new DamageEnemyComponent(ball, ["onCollide"]));
+  //ball.addComponent(new DamageEnemyComponent(ball, ["onCollide"]));
   //ball.addHitbox(new Hitbox(ball, "empty.png", ball.getAtk(), 0, 0, hitboxShape.CIRCLE, false, 0.5));
 
   const ball1 = new Ball("sword", 0);
