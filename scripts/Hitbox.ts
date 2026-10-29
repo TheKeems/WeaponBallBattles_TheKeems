@@ -64,7 +64,7 @@ export class Hitbox extends Sprite {
                 removeFromArr(this.iFrames, i);
             }
         }
-
+        
         //const cell = collisionMatrix[Math.floor(this.x/appBounds.cell_size)][Math.floor(this.y/appBounds.cell_size)];
         if(this.active){
             const boundBox = this.getBoundBox(this.getCorners(this));
@@ -200,7 +200,9 @@ export class Hitbox extends Sprite {
             }
         }
         if (!iframe) {
+            
             //other.takeDamage(this.par.getAtk());
+            this.par.preDamage(other);
             other.takeDamage(this.dmg);
             this.iFrames.push({ origin: other, duration: 350 });
         }

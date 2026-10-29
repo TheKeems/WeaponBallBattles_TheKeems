@@ -1,6 +1,6 @@
 import { Application, Assets, Graphics, Container } from "pixi.js";
 import manifest from "./manifest.json";
-import { Ball, BallConfig, hitboxShape, Hitbox, Melee, DamageEnemyComponent} from "../scripts/index";
+import { Ball, BallConfig, hitboxShape, Hitbox, Melee, scaleComponent} from "../scripts/index";
 import {hitboxthatdoesnothing} from "../scripts/hitboxthatdoesnothing";
 
 const BORDER_PADDING = 40;
@@ -77,8 +77,8 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
   //ball.addHitbox(new Hitbox(ball, "empty.png", ball.getAtk(), 0, 0, hitboxShape.CIRCLE, false, 0.5));
 
   const ball1 = new Ball("sword", 0);
-  ball1.addHitbox(new Melee(ball1, "sword/sword.png", ball1.getAtk(), 150, 35, 0.005, hitboxShape.RECT, true, -0.1, 0.5));
-  ball1.addComponent(new DamageEnemyComponent(ball1, ["onDamage"]));
+  //ball1.addHitbox(new Melee(ball1, "main/sword/sword.png", ball1.getAtk(), 150, 35, 0.005, hitboxShape.RECT, true, -0.1, 0.5));
+  //ball1.addComponent(new scaleComponent(ball1, ["onDamage"]));
 
   //const testbox = new hitboxthatdoesnothing(100, 100, "empty.png", 150, 35, hitboxShape.RECT, -0.1, 0.5);
 

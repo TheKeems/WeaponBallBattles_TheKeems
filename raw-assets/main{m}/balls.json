@@ -20,11 +20,20 @@
         "scl" : 1,
         "speedCap" : 8,
         "components": [{
-            "name" : "DamageEnemyComponent",
+            "name" : "collisionComponent",
             "tags" : ["onCollide"]
-        }],
+        },
+        {
+            "name" : "PreDamageComponent",
+            "tags" : ["preDamage"]
+        },
+        {
+            "name" : "scaleComponent",
+            "tags" : ["onDamage"]
+        }
+        ],
         "hitboxes" : [{
-            "type" : "melee",
+            "type" : "hitbox",
             "file" : "empty.png",
             "dmg" : 1 ,
             "width" : 150,
@@ -48,6 +57,24 @@
         "atk" : 1,
         "scl" : 1,
         "speedCap" : 8,
+        "components": [{
+            "name" : "scaleComponent",
+            "tags" : ["onDamage"]
+        
+        }],
+        "hitboxes" : [{
+            "type" : "melee",
+            "file" : "main/sword/sword.png",
+            "dmg" : 1 ,
+            "width" : 150,
+            "height" : 35,
+            "spinRate" : 0.005,
+            "shape" : "rect",
+            "active" : true,
+            "anchor_x" : -0.1,
+            "anchor_y" : 0.5
+
+        }],
         "displayedStats" : {
             "Health" : 100,
             "Current Speed" : 0,

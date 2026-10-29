@@ -85,29 +85,14 @@
         },
         {
           "alias": [
-            "main/sword/sword.png"
+            "main/sword/sword.png",
+            "sword.png"
           ],
           "src": [
             "main/sword/sword@0.5x.webp",
             "main/sword/sword@0.5x.png",
             "main/sword/sword.webp",
             "main/sword/sword.png"
-          ],
-          "data": {
-            "tags": {
-              "m": true
-            }
-          }
-        },
-        {
-          "alias": [
-            "main/sword2/sword.png"
-          ],
-          "src": [
-            "main/sword2/sword@0.5x.webp",
-            "main/sword2/sword@0.5x.png",
-            "main/sword2/sword.webp",
-            "main/sword2/sword.png"
           ],
           "data": {
             "tags": {

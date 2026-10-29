@@ -1,6 +1,6 @@
 import { Assets, Sprite, Text, Container, ColorMatrixFilter, ColorSource } from "pixi.js";
 import { removeFromArr, randInt, appBounds, setTimeflow, ballsconfig } from "../src/main";
-import { Hitbox } from "../scripts/index";
+import { Hitbox, Melee } from "../scripts/index";
 
 export interface Velocity {
   x: number;
@@ -14,9 +14,9 @@ export interface BallConfig {
   scl: number;
   speedCap: number;
   components: [{
-      name : string,
-      tags: string[]
-    }
+    name: string,
+    tags: string[]
+  }
   ];
   hitboxes: [{
     type: string,
@@ -24,8 +24,9 @@ export interface BallConfig {
     dmg: number,
     width: number,
     height: number,
+    spinRate : number,
     shape: string,
-    active : boolean,
+    active: boolean,
     anchor_x: number,
     anchor_y?: number
   }];
@@ -40,12 +41,12 @@ export interface BComponent {
 }
 
 //i dont know why the fuck i cant just pass in the enum
-const shapeConv : Record<string, number> = {
-  "rect" : 0, // RECT
-  "circle" : 1 // CIRCLE
+const shapeConv: Record<string, number> = {
+  "rect": 0, // RECT
+  "circle": 1 // CIRCLE
 }
 
-export class DamageEnemyComponent implements BComponent {
+export class collisionComponent implements BComponent {
   readonly tags;
   parent;
   constructor(parent: Ball, tags: string[]) {
@@ -55,15 +56,43 @@ export class DamageEnemyComponent implements BComponent {
 
   run(other: Ball) {
     if (this.parent.name === "unarmed") {
-      this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y) / 2);
-      this.parent.speedCap += 0.2;
-      this.parent.hitboxes[0].dmg = this.parent.getAtk();
       this.parent.hitboxes[0].dealDamage(other);
+    }
+  }
+}
+
+export class PreDamageComponent implements BComponent {
+  readonly tags;
+  parent;
+  constructor(parent: Ball, tags: string[]) {
+    this.parent = parent;
+    this.tags = tags;
+  }
+
+  run(other?: Ball) {
+    if (this.parent.name === "unarmed") {
+      this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y) / 2);
+      this.parent.hitboxes[0].dmg = this.parent.getAtk();
+    }
+  }
+}
+
+export class scaleComponent implements BComponent {
+  readonly tags;
+  parent;
+  constructor(parent: Ball, tags: string[]) {
+    this.parent = parent;
+    this.tags = tags;
+  }
+
+  run(other?: Ball) {
+    if (this.parent.name === "unarmed") {
+      this.parent.speedCap += 0.2;
     }
     if (this.parent.name === "sword") {
       this.parent.incrAtk(1);
+      this.parent.hitboxes[0].dmg = this.parent.getAtk();
     }
-    this.parent.hitboxes[0].dmg = this.parent.getAtk();
   }
 }
 
@@ -139,16 +168,37 @@ export class Ball extends Container {
 
     if (hitboxes) {
       for (const key of ballsconfig[ballType].hitboxes) {
-        this.addHitbox(new Hitbox(this, key.file, key.dmg, key.width, key.height, shapeConv[key.shape], key.active, key.anchor_x, key.anchor_y));
+        switch(key.type){
+          case "hitbox":{
+            this.addHitbox(new Hitbox(this, key.file, key.dmg, key.width, key.height, shapeConv[key.shape], key.active, key.anchor_x, key.anchor_y));
+            break;
+          }
+          case "melee":{
+            this.addHitbox(new Melee(this, key.file, key.dmg, key.width, key.height, key.spinRate, shapeConv[key.shape], key.active, key.anchor_x, key.anchor_y));
+            break;
+          }
+        }
+        
       }
     }
 
-    if(components){
+    if (components) {
       for (const key of ballsconfig[ballType].components) {
-        switch(key.name){
-          case "DamageEnemyComponent":
-            this.addComponent(new DamageEnemyComponent(this, key.tags));
+        switch (key.name) {
+          case "collisionComponent": {
+            this.addComponent(new collisionComponent(this, key.tags));
+            break;
+          }
+          case "PreDamageComponent": {
+            this.addComponent(new PreDamageComponent(this, key.tags));
+            break;
+          }
+          case "scaleComponent": {
+            this.addComponent(new scaleComponent(this, key.tags));
+            break;
+          }
         }
+
       }
     }
 
@@ -212,6 +262,15 @@ export class Ball extends Container {
   dealDamage(other: Ball) {
     for (const key of this.components) {
       if (key.tags.includes("onDamage")) {
+        key.run(other);
+      }
+    }
+    //other.takeDamage(this.atk);
+  }
+
+  preDamage(other: Ball) {
+    for (const key of this.components) {
+      if (key.tags.includes("preDamage")) {
         key.run(other);
       }
     }

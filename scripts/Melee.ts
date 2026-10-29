@@ -41,8 +41,9 @@ export class Melee extends Hitbox {
         super.update(deltams, appBounds, collisionMatrix);
 
         //const cell = collisionMatrix[Math.floor(this.x/appBounds.cell_size)][Math.floor(this.y/appBounds.cell_size)];
-
-        this.rotation += this.spinRate * deltams;
+        if(this.active){
+            this.rotation += this.spinRate * deltams;
+        }
     }
 
     checkHit(other: Ball): boolean {
