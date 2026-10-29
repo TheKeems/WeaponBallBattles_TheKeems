@@ -147,7 +147,6 @@ export class Ball extends Container {
       for (const key of ballsconfig[ballType].components) {
         switch(key.name){
           case "DamageEnemyComponent":
-            console.log("ADDED");
             this.addComponent(new DamageEnemyComponent(this, key.tags));
         }
       }
