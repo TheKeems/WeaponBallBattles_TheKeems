@@ -113,7 +113,7 @@ export class soundComponent implements BComponent {
   }
 
   run(other?: Ball) {
-    
+    sound.play(this.soundFile);
   }
 }
 
@@ -142,10 +142,11 @@ export class Ball extends Container {
     health: number = 100
   ) {
     const { title, file, atk, scl, speedCap, components, hitboxes, displayedStats, tint } = ballsconfig[ballType];
+    let bundle : string[] = [];
 
     super();
 
-    this.loadText(file);
+    bundle.push(file);
 
     this.sprite = new Sprite({
       texture: Assets.get(file),
@@ -224,6 +225,7 @@ export class Ball extends Container {
           }
           case "soundComponent": {
             this.addComponent(new soundComponent(this, key.tags, key.args[0]));
+            bundle.push(key.args[0]);
             break;
           }
         }
@@ -231,11 +233,18 @@ export class Ball extends Container {
       }
     }
 
+    Assets.addBundle(this.name, 
+      bundle.map(path => ({
+      alias: path.split('/').pop()?.split('.')[0] || path, // e.g., 'player'
+      src: path
+    })));
+
+
+
   }
 
-  async loadText(file: string) {
-    const texture = await Assets.load(file);
-    return texture;
+  async loadText() {
+    await Assets.loadBundle(this.name);
   }
 
   update(delta: number, deltams: number) {

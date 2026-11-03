@@ -6,8 +6,8 @@
             "inheritedMetaData": {},
             "transformData": {},
             "stats": {
-                "date": 1793231848402,
-                "duration": 12.27112501859665,
+                "date": 1793745028229,
+                "duration": 19.770749999996042,
                 "success": true
             }
         },
@@ -20,8 +20,8 @@
             "inheritedMetaData": {},
             "transformData": {},
             "stats": {
-                "date": 1793231848407,
-                "duration": 8.22583395242691,
+                "date": 1793745028231,
+                "duration": 18.002249999990454,
                 "success": true
             }
         },
@@ -34,11 +34,11 @@
             },
             "transformData": {},
             "stats": {
-                "date": 1793231848407,
-                "duration": 8.20058399438858,
+                "date": 1793745028233,
+                "duration": 16.816291999988607,
                 "success": true
             },
-            "hash": "m2Gh"
+            "hash": "4tYMMw"
         },
         ".assetpack/json/main{m}/balls.json": {
             "isFolder": false,
@@ -187,6 +187,176 @@
             },
             "transformData": {}
         },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword": {
+            "isFolder": true,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793744916393,
+                "duration": 6.484042000000045,
+                "success": true
+            }
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/sword.png": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793744916394,
+                "duration": 36.14079200000015,
+                "success": true
+            },
+            "hash": "InzCSg"
+        },
+        ".assetpack/mipmap/main{m}/sword/sword.png": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/sword.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/sword/sword.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/sword/sword.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/sword.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/sword/sword.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/sword/sword.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/sword/sword.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/sword.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/sword/sword.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/mipmap/main{m}/sword/sword@0.5x.png": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/sword.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/sword/sword@0.5x.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/sword/sword@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/sword@0.5x.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/sword/sword@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/sword/sword@0.5x.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/sword/sword@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/sword@0.5x.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/sword/sword@0.5x.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/swordHit.mp3": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793744916400,
+                "duration": 894.3497920000002,
+                "success": true
+            },
+            "hash": "Umn5Pg"
+        },
+        ".assetpack/audio/main{m}/sword/swordHit.mp3": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/swordHit.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/swordHit.mp3": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/sword/swordHit.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/audio/main{m}/sword/swordHit.ogg": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/swordHit.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/swordHit.ogg": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/sword/swordHit.ogg",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
         "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed.svg": {
             "isFolder": false,
             "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}",
@@ -310,111 +480,6 @@
         "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity@0.5x.webp": {
             "isFolder": false,
             "transformParent": ".assetpack/compress/main{m}/verity@0.5x.webp",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword.png": {
-            "isFolder": false,
-            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {},
-            "stats": {
-                "date": 1793207290388,
-                "duration": 40.55924999713898,
-                "success": true
-            },
-            "hash": "InzCSg"
-        },
-        ".assetpack/mipmap/main{m}/sword.png": {
-            "isFolder": false,
-            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        ".assetpack/compress/main{m}/sword.png": {
-            "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/sword.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword.png": {
-            "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/sword.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        ".assetpack/compress/main{m}/sword.webp": {
-            "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/sword.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword.webp": {
-            "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/sword.webp",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        ".assetpack/mipmap/main{m}/sword@0.5x.png": {
-            "isFolder": false,
-            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        ".assetpack/compress/main{m}/sword@0.5x.png": {
-            "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/sword@0.5x.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword@0.5x.png": {
-            "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/sword@0.5x.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        ".assetpack/compress/main{m}/sword@0.5x.webp": {
-            "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/sword@0.5x.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword@0.5x.webp": {
-            "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/sword@0.5x.webp",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true

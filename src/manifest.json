@@ -54,6 +54,38 @@
         },
         {
           "alias": [
+            "main/sword/sword.png",
+            "sword.png"
+          ],
+          "src": [
+            "main/sword/sword@0.5x.webp",
+            "main/sword/sword@0.5x.png",
+            "main/sword/sword.webp",
+            "main/sword/sword.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/sword/swordHit.mp3",
+            "swordHit.mp3"
+          ],
+          "src": [
+            "main/sword/swordHit.ogg",
+            "main/sword/swordHit.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
             "main/unarmed.svg",
             "unarmed.svg"
           ],
@@ -76,23 +108,6 @@
             "main/verity@0.5x.png",
             "main/verity.webp",
             "main/verity.png"
-          ],
-          "data": {
-            "tags": {
-              "m": true
-            }
-          }
-        },
-        {
-          "alias": [
-            "main/sword/sword.png",
-            "sword.png"
-          ],
-          "src": [
-            "main/sword/sword@0.5x.webp",
-            "main/sword/sword@0.5x.png",
-            "main/sword/sword.webp",
-            "main/sword/sword.png"
           ],
           "data": {
             "tags": {

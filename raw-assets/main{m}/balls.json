@@ -86,6 +86,11 @@
             "name" : "scaleComponent",
             "tags" : ["onDamage"]
         
+        },{
+            "name" : "soundComponent",
+            "tags" : ["onDamage"],
+            "args" : ["main/sword/swordHit.mp3"]
+        
         }],
         "hitboxes" : [{
             "type" : "melee",
