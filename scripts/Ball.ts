@@ -1,6 +1,7 @@
 import { Assets, Sprite, Text, Container, ColorMatrixFilter, ColorSource } from "pixi.js";
 import { removeFromArr, randInt, setTimeflow, ballsconfig, gameBounds, collisionMatrix } from "../src/main";
 import { Hitbox, Melee } from "../scripts/index";
+import { sound } from '@pixi/sound';
 
 export interface Velocity {
   x: number;
@@ -15,7 +16,8 @@ export interface BallConfig {
   speedCap: number;
   components: [{
     name: string,
-    tags: string[]
+    tags: string[],
+    args : any[]
   }
   ];
   hitboxes: [{
@@ -97,6 +99,21 @@ export class scaleComponent implements BComponent {
         this.parent.hitboxes[0].dmg = this.parent.getAtk();
       }
     }
+  }
+}
+
+export class soundComponent implements BComponent {
+  readonly tags;
+  parent;
+  soundFile : string;
+  constructor(parent: Ball, tags: string[], soundFile : string) {
+    this.parent = parent;
+    this.tags = tags;
+    this.soundFile = soundFile;
+  }
+
+  run(other?: Ball) {
+    
   }
 }
 
@@ -203,6 +220,10 @@ export class Ball extends Container {
           }
           case "scaleComponent": {
             this.addComponent(new scaleComponent(this, key.tags));
+            break;
+          }
+          case "soundComponent": {
+            this.addComponent(new soundComponent(this, key.tags, key.args[0]));
             break;
           }
         }
