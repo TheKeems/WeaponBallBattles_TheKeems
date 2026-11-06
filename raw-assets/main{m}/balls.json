@@ -55,18 +55,24 @@
         {
             "name" : "scaleComponent",
             "tags" : ["onDamage"]
+        },
+        {
+            "name" : "soundComponent",
+            "tags" : ["onDamage"],
+            "args" : ["main/unarmed/unarmedHit.mp3"]
+        
         }
         ],
         "hitboxes" : [{
             "type" : "hitbox",
             "file" : "empty.png",
             "dmg" : 1 ,
-            "width" : 150,
-            "height" : 35,
+            "width" : 0,
+            "height" : 0,
             "shape" : "rect",
             "active" : false,
-            "anchor_x" : -0.1,
-            "anchor_y" : 0.5
+            "anchor_x" : 0,
+            "anchor_y" : 0
 
         }],
         "displayedStats" : {

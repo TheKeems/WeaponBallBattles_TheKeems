@@ -114,6 +114,21 @@
               "m": true
             }
           }
+        },
+        {
+          "alias": [
+            "main/unarmed/unarmedHit.mp3",
+            "unarmedHit.mp3"
+          ],
+          "src": [
+            "main/unarmed/unarmedHit.ogg",
+            "main/unarmed/unarmedHit.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
         }
       ]
     }

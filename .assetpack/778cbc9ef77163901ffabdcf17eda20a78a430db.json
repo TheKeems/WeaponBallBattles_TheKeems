@@ -6,8 +6,8 @@
             "inheritedMetaData": {},
             "transformData": {},
             "stats": {
-                "date": 1793745028229,
-                "duration": 19.770749999996042,
+                "date": 1793923388555,
+                "duration": 14.382625013589859,
                 "success": true
             }
         },
@@ -20,8 +20,8 @@
             "inheritedMetaData": {},
             "transformData": {},
             "stats": {
-                "date": 1793745028231,
-                "duration": 18.002249999990454,
+                "date": 1793923388556,
+                "duration": 14.280791997909546,
                 "success": true
             }
         },
@@ -34,11 +34,11 @@
             },
             "transformData": {},
             "stats": {
-                "date": 1793745028233,
-                "duration": 16.816291999988607,
+                "date": 1793923388556,
+                "duration": 14.232542008161545,
                 "success": true
             },
-            "hash": "4tYMMw"
+            "hash": "kNeulQ"
         },
         ".assetpack/json/main{m}/balls.json": {
             "isFolder": false,
@@ -196,8 +196,8 @@
             },
             "transformData": {},
             "stats": {
-                "date": 1793744916393,
-                "duration": 6.484042000000045,
+                "date": 1793923166424,
+                "duration": 0.031042009592056274,
                 "success": true
             }
         },
@@ -315,11 +315,11 @@
             },
             "transformData": {},
             "stats": {
-                "date": 1793744916400,
-                "duration": 894.3497920000002,
+                "date": 1793923158866,
+                "duration": 784.0739579796791,
                 "success": true
             },
-            "hash": "Umn5Pg"
+            "hash": "r5ZA4g"
         },
         ".assetpack/audio/main{m}/sword/swordHit.mp3": {
             "isFolder": false,
@@ -480,6 +480,71 @@
         "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity@0.5x.webp": {
             "isFolder": false,
             "transformParent": ".assetpack/compress/main{m}/verity@0.5x.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed": {
+            "isFolder": true,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793923248469,
+                "duration": 0.40104198455810547,
+                "success": true
+            }
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed/unarmedHit.mp3": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793923248469,
+                "duration": 53.368416994810104,
+                "success": true
+            },
+            "hash": "WotZHQ"
+        },
+        ".assetpack/audio/main{m}/unarmed/unarmedHit.mp3": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed/unarmedHit.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/unarmed/unarmedHit.mp3": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/unarmed/unarmedHit.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/audio/main{m}/unarmed/unarmedHit.ogg": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed/unarmedHit.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/unarmed/unarmedHit.ogg": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/unarmed/unarmedHit.ogg",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true

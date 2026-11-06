@@ -40,8 +40,9 @@ export let gameBounds: appBounds;
 export const debugGfx = new Graphics();
 export const balls : Ball[] = [];
 
-export function addBall(name : string, team? : number, health? : number){
+export async function addBall(name : string, team? : number, health? : number){
   const b = new Ball(name, team, health);
+  //await Assets.loadBundle(name);
   balls.push(b);
   gameContainer.addChild(b);  
 }
@@ -60,7 +61,7 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
         // .stroke({ width: 2, color: hit ? 0xff0000 : 0x00aaff });
 }
 
-(async () => {
+async function init(){
   await app.init({
     background: "#ffffff",
     resizeTo: window,
@@ -130,6 +131,20 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
   window.addEventListener('resize', resize);
   resize();
 
-})();
+};
+
+const startButton = document.getElementById('start');
+
+console.log(startButton);
+
+if(startButton){
+  startButton.addEventListener('click', async () => {
+      init();
+      startButton.remove();
+  });
+}
+
+
+
 
 

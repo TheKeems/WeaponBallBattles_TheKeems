@@ -233,18 +233,12 @@ export class Ball extends Container {
       }
     }
 
-    Assets.addBundle(this.name, 
-      bundle.map(path => ({
-      alias: path.split('/').pop()?.split('.')[0] || path, // e.g., 'player'
-      src: path
-    })));
+    // Assets.addBundle(this.name, 
+    //   bundle.map(path => ({
+    //   alias: path.split('/').pop()?.split('.')[0] || path,
+    //   src: path
+    // })));
 
-
-
-  }
-
-  async loadText() {
-    await Assets.loadBundle(this.name);
   }
 
   update(delta: number, deltams: number) {
