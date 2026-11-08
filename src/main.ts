@@ -5,8 +5,8 @@ import {hitboxthatdoesnothing} from "../scripts/hitboxthatdoesnothing";
 
 const BORDER_PADDING = 40;
 const BORDER_WIDTH = 4;
-const GAME_HEIGHT = 600;
-const GAME_WIDTH = 600;
+const GAME_HEIGHT = 800;
+const GAME_WIDTH = 800;
 const CELL_SIZE = GAME_HEIGHT/5;
 let timeFlow = true;
 export let collisionMatrix : Ball[][][] = [[[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []]];
@@ -97,8 +97,9 @@ async function init(){
       .stroke({ width: BORDER_WIDTH, color: 0x000000 });
   };
 
-  addBall("unarmed", 1, 100);
-  addBall("sword", 0, 100);
+  //addBall("unarmed", 1, 250);
+  addBall("sword", 0, 250);
+  addBall("verity", 2, 250);
 
   //const testbox = new hitboxthatdoesnothing(100, 100, "empty.png", 150, 35, hitboxShape.RECT, -0.1, 0.5);
   //^ DO NOT DELETE USED FOR TESTING
@@ -134,8 +135,6 @@ async function init(){
 };
 
 const startButton = document.getElementById('start');
-
-console.log(startButton);
 
 if(startButton){
   startButton.addEventListener('click', async () => {

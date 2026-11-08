@@ -3,6 +3,10 @@ import { removeFromArr, randInt, setTimeflow, ballsconfig, gameBounds, collision
 import { Hitbox, Melee } from "../scripts/index";
 import { sound } from '@pixi/sound';
 
+
+type stats = "attack" | "defense"
+type hitboxType = "hitbox" | "melee"
+
 export interface Velocity {
   x: number;
   y: number;
@@ -17,26 +21,36 @@ export interface BallConfig {
   components: [{
     name: string,
     tags: string[],
-    args : any[]
+    args: any[]
   }
   ];
   hitboxes: [{
-    type: string,
+    type: hitboxType,
     file: string,
     dmg: number,
     width: number,
     height: number,
-    spinRate : number,
+    spinRate: number,
     shape: string,
     active: boolean,
     anchor_x: number,
     anchor_y?: number
   }];
   displayedStats: {};
+  hideHealth: boolean;
   tint: ColorSource
 }
 
+interface Buff {
+  title: string,
+  origin: Ball,
+  stat: stats,
+  value: number,
+  duration?: number
+}
+
 export interface BComponent {
+  name: string;
   tags: string[];
   parent: Ball;
   run(...params: any): any;
@@ -48,7 +62,63 @@ const shapeConv: Record<string, number> = {
   "circle": 1 // CIRCLE
 }
 
-export class collisionComponent implements BComponent {
+export class shapeshiftComponent implements BComponent {
+  readonly name = "shapeshiftComponent";
+  readonly tags;
+  parent;
+  sprites: string[];
+  currentSprite = -1;
+  constructor(parent: Ball, tags: string[], sprites: string[]) {
+    this.parent = parent;
+    this.tags = tags;
+    this.sprites = sprites;
+  }
+
+  run(other: Ball) {
+    switch (this.parent.name) {
+      case "verity": {
+        this.parent.removeArithmeticBuff("crueltyRage");
+        this.parent.removeArithmeticBuff("falsityReduction");
+        this.currentSprite = randInt(0, this.sprites.length);
+        this.parent.sprite.texture = Assets.get(this.sprites[this.currentSprite]);
+
+        switch (this.currentSprite) {
+          case 0: {
+            this.parent.incrAtk(1);
+            break;
+          }
+          case 1: {
+            this.parent.addArthmeticBuff({
+              title: "falsityReduction",
+              origin: this.parent,
+              stat: "defense",
+              value: 0.5
+            })
+            break;
+          }
+          case 2:{
+            this.parent.addArthmeticBuff({
+              title: "crueltyRage",
+              origin: this.parent,
+              stat: "attack",
+              value: 0.5
+            })
+            break;
+          }
+          case 3:{
+            this.parent.heal(5)
+            break;
+          }
+        }
+
+        break;
+      }
+    }
+  }
+}
+
+export class collisionDmgComponent implements BComponent {
+  readonly name = "collisionDmgComponent";
   readonly tags;
   parent;
   constructor(parent: Ball, tags: string[]) {
@@ -62,6 +132,7 @@ export class collisionComponent implements BComponent {
 }
 
 export class PreDamageComponent implements BComponent {
+  readonly name = "PreDamageComponent";
   readonly tags;
   parent;
   constructor(parent: Ball, tags: string[]) {
@@ -70,17 +141,18 @@ export class PreDamageComponent implements BComponent {
   }
 
   run(other?: Ball) {
-    switch(this.parent.name){
-      case "unarmed":{
+    switch (this.parent.name) {
+      case "unarmed": {
         this.parent.setAtk(Math.hypot(this.parent.velocity.x, this.parent.velocity.y) / 2);
-        this.parent.hitboxes[0].dmg = this.parent.getAtk();
         break;
       }
     }
+    this.parent.hitboxes[0].dmg = this.parent.getAtk();
   }
 }
 
 export class scaleComponent implements BComponent {
+  readonly name = "scaleComponent";
   readonly tags;
   parent;
   constructor(parent: Ball, tags: string[]) {
@@ -89,31 +161,44 @@ export class scaleComponent implements BComponent {
   }
 
   run(other?: Ball) {
-    switch(this.parent.name){
-      case "unarmed":{
+    switch (this.parent.name) {
+      case "unarmed": {
         this.parent.speedCap += 0.3;
         break;
       }
-      case "sword" : {
+      case "sword": {
         this.parent.incrAtk(1);
         this.parent.hitboxes[0].dmg = this.parent.getAtk();
+        break;
+      }
+      case "verity": {
+        this.parent.incrAtk(0.5);
+        this.parent.hitboxes[0].dmg = this.parent.getAtk();
+        break;
       }
     }
   }
 }
 
 export class soundComponent implements BComponent {
+  readonly name = "soundComponent";
   readonly tags;
   parent;
-  soundFile : string;
-  constructor(parent: Ball, tags: string[], soundFile : string) {
+  soundFile: string | string[];
+  constructor(parent: Ball, tags: string[], soundFile: string | string[]) {
     this.parent = parent;
     this.tags = tags;
     this.soundFile = soundFile;
   }
 
-  run(other?: Ball) {
-    sound.play(this.soundFile);
+  run(i?: number) {
+    if (typeof this.soundFile === "string") {
+      sound.play(this.soundFile);
+    }
+    else {
+      sound.play(this.soundFile[randInt(0, this.soundFile.length)]);
+    }
+
   }
 }
 
@@ -121,6 +206,10 @@ export class soundComponent implements BComponent {
 export class Ball extends Container {
   private health;
   private atk;
+  private defMod = 0;
+  private atkMod = 0;
+  private buffsA: Buff[] = [];
+  private buffsM: Buff[] = [];
   public speedCap;
   public scl;
   public title;
@@ -129,7 +218,7 @@ export class Ball extends Container {
   public hitbox_height;
   public hitbox_width;
   private colorMatrix;
-  private sprite: Sprite;
+  public sprite: Sprite;
   public healthLabel = new Text({ text: "" });
   public hitboxes: Hitbox[];
   public cellArr: Ball[] | null = null;
@@ -141,8 +230,8 @@ export class Ball extends Container {
     team: number = 0,
     health: number = 100
   ) {
-    const { title, file, atk, scl, speedCap, components, hitboxes, displayedStats, tint } = ballsconfig[ballType];
-    let bundle : string[] = [];
+    const { title, file, atk, scl, speedCap, components, hitboxes, displayedStats, tint, hideHealth = false } = ballsconfig[ballType];
+    let bundle: string[] = [];
 
     super();
 
@@ -183,7 +272,9 @@ export class Ball extends Container {
 
     this.setSize(100 * scl, 100 * scl);
 
-    this.addChild(this.healthLabel);
+    if (!hideHealth) {
+      this.addChild(this.healthLabel);
+    }
 
     const angle = Math.random() * Math.PI * 2;
     this.velocity = { x: Math.cos(angle) * speedCap, y: Math.sin(angle) * speedCap };
@@ -191,28 +282,28 @@ export class Ball extends Container {
     this.x = randInt(100, gameBounds.width - 100);
     this.y = randInt(100, gameBounds.height - 100);
 
-    
+
     if (hitboxes) {
       for (const key of ballsconfig[ballType].hitboxes) {
-        switch(key.type){
-          case "hitbox":{
+        switch (key.type) {
+          case "hitbox": {
             this.addHitbox(new Hitbox(this, key.file, key.dmg, key.width, key.height, shapeConv[key.shape], key.active, key.anchor_x, key.anchor_y));
             break;
           }
-          case "melee":{
+          case "melee": {
             this.addHitbox(new Melee(this, key.file, key.dmg, key.width, key.height, key.spinRate, shapeConv[key.shape], key.active, key.anchor_x, key.anchor_y));
             break;
           }
         }
-        
+
       }
     }
 
     if (components) {
       for (const key of ballsconfig[ballType].components) {
         switch (key.name) {
-          case "collisionComponent": {
-            this.addComponent(new collisionComponent(this, key.tags));
+          case "collisionDmgComponent": {
+            this.addComponent(new collisionDmgComponent(this, key.tags));
             break;
           }
           case "PreDamageComponent": {
@@ -224,8 +315,12 @@ export class Ball extends Container {
             break;
           }
           case "soundComponent": {
-            this.addComponent(new soundComponent(this, key.tags, key.args[0]));
-            bundle.push(key.args[0]);
+            this.addComponent(new soundComponent(this, key.tags, key.args));
+            //bundle.push(key.args[0]);
+            break;
+          }
+          case "shapeshiftComponent": {
+            this.addComponent(new shapeshiftComponent(this, key.tags, key.args));
             break;
           }
         }
@@ -297,8 +392,6 @@ export class Ball extends Container {
         key.run(other);
       }
     }
-
-    //other.takeDamage(this.atk);
   }
 
   preDamage(other: Ball) {
@@ -307,10 +400,15 @@ export class Ball extends Container {
         key.run(other);
       }
     }
-    //other.takeDamage(this.atk);
   }
 
   takeDamage(damageTaken: number) {
+    if (this.defMod < 0) {
+      damageTaken *= (1 - this.defMod);
+    }
+    else {
+      damageTaken *= (1 / (1 + this.defMod));
+    }
     this.health -= damageTaken;
     this.healthLabel.text = Math.round(this.health);
     this.colorMatrix.brightness(1.2, false);
@@ -336,14 +434,14 @@ export class Ball extends Container {
     if (this.x - hw <= gameBounds.left) {
       this.x = gameBounds.left + hw;
       this.velocity.x = Math.abs(this.velocity.x);
-      if (Math.abs(this.velocity.x) <= this.speedCap/2) {
-        this.velocity.x += this.speedCap/2;
+      if (Math.abs(this.velocity.x) <= this.speedCap / 2) {
+        this.velocity.x += this.speedCap / 2;
       }
     } else if (this.x + hw >= gameBounds.right) {
       this.x = gameBounds.right - hw;
       this.velocity.x = -Math.abs(this.velocity.x);
-      if (Math.abs(this.velocity.x) <= this.speedCap/2) {
-        this.velocity.x -= this.speedCap/2;
+      if (Math.abs(this.velocity.x) <= this.speedCap / 2) {
+        this.velocity.x -= this.speedCap / 2;
       }
     }
 
@@ -355,9 +453,9 @@ export class Ball extends Container {
 
       this.velocity.y = -Math.abs(this.velocity.y);
       if (this.velocity.y > -10) {
-        this.velocity.y -= this.speedCap/2;
+        this.velocity.y -= this.speedCap / 2;
       }
-      if (Math.abs(this.velocity.x) <= this.speedCap/2) {
+      if (Math.abs(this.velocity.x) <= this.speedCap / 2) {
         this.velocity.x += randInt(-1, 1) * this.speedCap;
       }
     }
@@ -451,12 +549,70 @@ export class Ball extends Container {
   }
 
   runComponentWithTag(tag: string, ...params: Ball[]) {
-
+    for (const key of this.components) {
+      if (key.tags.includes(tag)) {
+        key.run(params);
+      }
+    }
   }
 
-  // getComponent(s : string){
-  //   return this.components.get(s);
-  // }
+  getComponents() {
+    return this.components;
+  }
+
+  findComponent<T extends BComponent, U extends T>(
+    list: T[],
+    targetClass: new (...args: any[]) => U
+  ): U[] {
+    return list.filter((item): item is U => item instanceof targetClass);
+  }
+
+  addArthmeticBuff(b: Buff) {
+    this.buffsA.push(b)
+    switch (b.stat) {
+      case "attack": {
+        this.atkMod += b.value
+        break;
+      }
+      case "defense": {
+        this.defMod += b.value
+        break;
+      }
+    }
+  }
+
+  removeArithmeticBuff(title: string | Buff) {
+    for (let i = 0; i < this.buffsA.length; i++) {
+      const key = this.buffsA[i]
+      if((typeof title === "string" && key.title === title) || (typeof title === "object" && key === title)){
+        switch (key.stat) {
+          case "attack": {
+            this.atkMod -= key.value
+            break;
+          }
+          case "defense": {
+            this.defMod -= key.value
+            break;
+          }
+        }
+        this.buffsA.splice(i, 1)
+        return;
+      }
+    }
+  }
+  
+  getatkMod(){
+    return this.atkMod;
+  }
+
+  getdefMod(){
+    return this.defMod;
+  }
+
+  heal(n : number){
+    this.health += n;
+    this.healthLabel.text = Math.round(this.health);
+  }
 
   // hasComponent(s : string) : boolean{
   //   return this.components.has(s);
