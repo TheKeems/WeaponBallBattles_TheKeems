@@ -13,30 +13,41 @@
         "scl" : 1,
         "speedCap" : 8,
         "components": [{
-            "name" : "collisionComponent",
+            "name" : "collisionDmgComponent",
             "tags" : ["onCollide"]
         },
         {
             "name" : "scaleComponent",
             "tags" : ["onDamage"]
-        }],
+        },
+        {
+            "name" : "shapeshiftComponent",
+            "tags" : ["onCollide"],
+            "args" : ["main/verity/verity.png", "main/verity/falsity.png", "main/verity/cruelty.png", "main/verity/lovity.png"]
+        },
+        {
+            "name" : "soundComponent",
+            "tags" : ["onCollide"],
+            "args" : ["main/verity/hey.mp3", "main/verity/its me.mp3", "main/verity/its verity.mp3", "main/verity/ask me anything.mp3","main/verity/i know about a million things.mp3"]
+        }
+        ],
         "hitboxes" : [{
             "type" : "hitbox",
             "file" : "empty.png",
             "dmg" : 1 ,
-            "width" : 150,
-            "height" : 35,
+            "width" : 0,
+            "height" : 0,
             "shape" : "rect",
             "active" : false,
-            "anchor_x" : -0.1,
-            "anchor_y" : 0.5
-
+            "anchor_x" : 0,
+            "anchor_y" : 0
         }],
         "displayedStats" : {
             "Health" : 100,
             "Current Speed" : 0,
             "Max Speed" : 0
-        }
+        },
+        "hideHealth" : false
     },
     "unarmed" : {
         "title" : "Unarmed",
@@ -45,7 +56,7 @@
         "scl" : 1,
         "speedCap" : 8,
         "components": [{
-            "name" : "collisionComponent",
+            "name" : "collisionDmgComponent",
             "tags" : ["onCollide"]
         },
         {
@@ -55,19 +66,24 @@
         {
             "name" : "scaleComponent",
             "tags" : ["onDamage"]
+        },
+        {
+            "name" : "soundComponent",
+            "tags" : ["onDamage"],
+            "args" : ["main/unarmed/unarmedHit.mp3"]
+        
         }
         ],
         "hitboxes" : [{
             "type" : "hitbox",
             "file" : "empty.png",
             "dmg" : 1 ,
-            "width" : 150,
-            "height" : 35,
+            "width" : 0,
+            "height" : 0,
             "shape" : "rect",
             "active" : false,
-            "anchor_x" : -0.1,
-            "anchor_y" : 0.5
-
+            "anchor_x" : 0,
+            "anchor_y" : 0
         }],
         "displayedStats" : {
             "Health" : 100,
@@ -85,6 +101,11 @@
         "components": [{
             "name" : "scaleComponent",
             "tags" : ["onDamage"]
+        
+        },{
+            "name" : "soundComponent",
+            "tags" : ["onDamage"],
+            "args" : ["main/sword/swordHit.mp3"]
         
         }],
         "hitboxes" : [{

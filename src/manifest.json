@@ -54,6 +54,53 @@
         },
         {
           "alias": [
+            "main/sword/sword.png",
+            "sword.png"
+          ],
+          "src": [
+            "main/sword/sword@0.5x.webp",
+            "main/sword/sword@0.5x.png",
+            "main/sword/sword.webp",
+            "main/sword/sword.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/sword/swordHit.mp3",
+            "swordHit.mp3"
+          ],
+          "src": [
+            "main/sword/swordHit.ogg",
+            "main/sword/swordHit.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/unarmed/unarmedHit.mp3",
+            "unarmedHit.mp3"
+          ],
+          "src": [
+            "main/unarmed/unarmedHit.ogg",
+            "main/unarmed/unarmedHit.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
             "main/unarmed.svg",
             "unarmed.svg"
           ],
@@ -68,14 +115,12 @@
         },
         {
           "alias": [
-            "main/verity.png",
-            "verity.png"
+            "main/verity/ask me anything.mp3",
+            "ask me anything.mp3"
           ],
           "src": [
-            "main/verity@0.5x.webp",
-            "main/verity@0.5x.png",
-            "main/verity.webp",
-            "main/verity.png"
+            "main/verity/ask me anything.ogg",
+            "main/verity/ask me anything.mp3"
           ],
           "data": {
             "tags": {
@@ -85,14 +130,125 @@
         },
         {
           "alias": [
-            "main/sword/sword.png",
-            "sword.png"
+            "main/verity/cruelty.png",
+            "cruelty.png"
           ],
           "src": [
-            "main/sword/sword@0.5x.webp",
-            "main/sword/sword@0.5x.png",
-            "main/sword/sword.webp",
-            "main/sword/sword.png"
+            "main/verity/cruelty@0.5x.webp",
+            "main/verity/cruelty@0.5x.png",
+            "main/verity/cruelty.webp",
+            "main/verity/cruelty.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/verity/falsity.png",
+            "falsity.png"
+          ],
+          "src": [
+            "main/verity/falsity@0.5x.webp",
+            "main/verity/falsity@0.5x.png",
+            "main/verity/falsity.webp",
+            "main/verity/falsity.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/verity/hey.mp3",
+            "hey.mp3"
+          ],
+          "src": [
+            "main/verity/hey.ogg",
+            "main/verity/hey.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/verity/i know about a million things.mp3",
+            "i know about a million things.mp3"
+          ],
+          "src": [
+            "main/verity/i know about a million things.ogg",
+            "main/verity/i know about a million things.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/verity/its me.mp3",
+            "its me.mp3"
+          ],
+          "src": [
+            "main/verity/its me.ogg",
+            "main/verity/its me.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/verity/its verity.mp3",
+            "its verity.mp3"
+          ],
+          "src": [
+            "main/verity/its verity.ogg",
+            "main/verity/its verity.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/verity/lovity.png",
+            "lovity.png"
+          ],
+          "src": [
+            "main/verity/lovity@0.5x.webp",
+            "main/verity/lovity@0.5x.png",
+            "main/verity/lovity.webp",
+            "main/verity/lovity.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/verity/verity.png",
+            "verity.png"
+          ],
+          "src": [
+            "main/verity/verity@0.5x.webp",
+            "main/verity/verity@0.5x.png",
+            "main/verity/verity.webp",
+            "main/verity/verity.png"
           ],
           "data": {
             "tags": {

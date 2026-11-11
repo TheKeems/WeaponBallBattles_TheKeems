@@ -203,7 +203,7 @@ export class Hitbox extends Sprite {
             
             //other.takeDamage(this.par.getAtk());
             this.par.preDamage(other);
-            other.takeDamage(this.dmg);
+            other.takeDamage(this.dmg * (this.par.getatkMod() >= 0 ? (1 + this.par.getatkMod()) : (1 / (1 - this.par.getatkMod()))));
             this.iFrames.push({ origin: other, duration: 50, touch : true });
             this.par.dealDamage(other);
         }

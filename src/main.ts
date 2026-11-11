@@ -5,8 +5,8 @@ import {hitboxthatdoesnothing} from "../scripts/hitboxthatdoesnothing";
 
 const BORDER_PADDING = 40;
 const BORDER_WIDTH = 4;
-const GAME_HEIGHT = 600;
-const GAME_WIDTH = 600;
+const GAME_HEIGHT = 800;
+const GAME_WIDTH = 800;
 const CELL_SIZE = GAME_HEIGHT/5;
 let timeFlow = true;
 export let collisionMatrix : Ball[][][] = [[[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []]];
@@ -40,8 +40,9 @@ export let gameBounds: appBounds;
 export const debugGfx = new Graphics();
 export const balls : Ball[] = [];
 
-export function addBall(name : string, team? : number, health? : number){
+export async function addBall(name : string, team? : number, health? : number){
   const b = new Ball(name, team, health);
+  //await Assets.loadBundle(name);
   balls.push(b);
   gameContainer.addChild(b);  
 }
@@ -60,7 +61,7 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
         // .stroke({ width: 2, color: hit ? 0xff0000 : 0x00aaff });
 }
 
-(async () => {
+async function init(){
   await app.init({
     background: "#ffffff",
     resizeTo: window,
@@ -96,11 +97,9 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
       .stroke({ width: BORDER_WIDTH, color: 0x000000 });
   };
 
-  addBall("unarmed", 1, 250);
-  addBall("sword", 0, 100);
-  addBall("sword", 0, 100);
-  addBall("sword", 0, 100);
-  addBall("sword", 0, 100);
+  //addBall("unarmed", 1, 250);
+  addBall("sword", 0, 250);
+  addBall("verity", 2, 250);
 
   //const testbox = new hitboxthatdoesnothing(100, 100, "empty.png", 150, 35, hitboxShape.RECT, -0.1, 0.5);
   //^ DO NOT DELETE USED FOR TESTING
@@ -133,6 +132,18 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
   window.addEventListener('resize', resize);
   resize();
 
-})();
+};
+
+const startButton = document.getElementById('start');
+
+if(startButton){
+  startButton.addEventListener('click', async () => {
+      init();
+      startButton.remove();
+  });
+}
+
+
+
 
 

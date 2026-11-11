@@ -6,8 +6,8 @@
             "inheritedMetaData": {},
             "transformData": {},
             "stats": {
-                "date": 1793231848402,
-                "duration": 12.27112501859665,
+                "date": 1794176003016,
+                "duration": 72.14324998855591,
                 "success": true
             }
         },
@@ -20,8 +20,8 @@
             "inheritedMetaData": {},
             "transformData": {},
             "stats": {
-                "date": 1793231848407,
-                "duration": 8.22583395242691,
+                "date": 1794176003030,
+                "duration": 61.45779198408127,
                 "success": true
             }
         },
@@ -34,11 +34,11 @@
             },
             "transformData": {},
             "stats": {
-                "date": 1793231848407,
-                "duration": 8.20058399438858,
+                "date": 1794176003031,
+                "duration": 61.001249969005585,
                 "success": true
             },
-            "hash": "m2Gh"
+            "hash": "eRcZ9A"
         },
         ".assetpack/json/main{m}/balls.json": {
             "isFolder": false,
@@ -187,6 +187,176 @@
             },
             "transformData": {}
         },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword": {
+            "isFolder": true,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793923166424,
+                "duration": 0.031042009592056274,
+                "success": true
+            }
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/sword.png": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793744916394,
+                "duration": 36.14079200000015,
+                "success": true
+            },
+            "hash": "InzCSg"
+        },
+        ".assetpack/mipmap/main{m}/sword/sword.png": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/sword.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/sword/sword.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/sword/sword.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/sword.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/sword/sword.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/sword/sword.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/sword/sword.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/sword.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/sword/sword.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/mipmap/main{m}/sword/sword@0.5x.png": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/sword.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/sword/sword@0.5x.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/sword/sword@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/sword@0.5x.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/sword/sword@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/sword/sword@0.5x.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/sword/sword@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/sword@0.5x.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/sword/sword@0.5x.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/swordHit.mp3": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793923158866,
+                "duration": 784.0739579796791,
+                "success": true
+            },
+            "hash": "r5ZA4g"
+        },
+        ".assetpack/audio/main{m}/sword/swordHit.mp3": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/swordHit.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/swordHit.mp3": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/sword/swordHit.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/audio/main{m}/sword/swordHit.ogg": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword/swordHit.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword/swordHit.ogg": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/sword/swordHit.ogg",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
         "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed.svg": {
             "isFolder": false,
             "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}",
@@ -211,8 +381,8 @@
             },
             "transformData": {}
         },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity.png": {
-            "isFolder": false,
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed": {
+            "isFolder": true,
             "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}",
             "metaData": {},
             "inheritedMetaData": {
@@ -220,104 +390,64 @@
             },
             "transformData": {},
             "stats": {
-                "date": 1792943628519,
-                "duration": 208.4750420153141,
+                "date": 1793923248469,
+                "duration": 0.40104198455810547,
+                "success": true
+            }
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed/unarmedHit.mp3": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793923248469,
+                "duration": 53.368416994810104,
                 "success": true
             },
-            "hash": "yYO9Vw"
+            "hash": "WotZHQ"
         },
-        ".assetpack/mipmap/main{m}/verity.png": {
+        ".assetpack/audio/main{m}/unarmed/unarmedHit.mp3": {
             "isFolder": false,
-            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity.png",
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed/unarmedHit.mp3",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        ".assetpack/compress/main{m}/verity.png": {
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/unarmed/unarmedHit.mp3": {
             "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/verity.png",
+            "transformParent": ".assetpack/audio/main{m}/unarmed/unarmedHit.mp3",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity.png": {
+        ".assetpack/audio/main{m}/unarmed/unarmedHit.ogg": {
             "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/verity.png",
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/unarmed/unarmedHit.mp3",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        ".assetpack/compress/main{m}/verity.webp": {
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/unarmed/unarmedHit.ogg": {
             "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/verity.png",
+            "transformParent": ".assetpack/audio/main{m}/unarmed/unarmedHit.ogg",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity.webp": {
-            "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/verity.webp",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        ".assetpack/mipmap/main{m}/verity@0.5x.png": {
-            "isFolder": false,
-            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        ".assetpack/compress/main{m}/verity@0.5x.png": {
-            "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/verity@0.5x.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity@0.5x.png": {
-            "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/verity@0.5x.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        ".assetpack/compress/main{m}/verity@0.5x.webp": {
-            "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/verity@0.5x.png",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity@0.5x.webp": {
-            "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/verity@0.5x.webp",
-            "metaData": {},
-            "inheritedMetaData": {
-                "m": true
-            },
-            "transformData": {}
-        },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword.png": {
-            "isFolder": false,
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity": {
+            "isFolder": true,
             "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}",
             "metaData": {},
             "inheritedMetaData": {
@@ -325,96 +455,680 @@
             },
             "transformData": {},
             "stats": {
-                "date": 1793207290388,
-                "duration": 40.55924999713898,
+                "date": 1793926383075,
+                "duration": 18.331750005483627,
+                "success": true
+            }
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/cruelty.png": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793924166440,
+                "duration": 34.375375002622604,
                 "success": true
             },
-            "hash": "InzCSg"
+            "hash": "7jZz"
         },
-        ".assetpack/mipmap/main{m}/sword.png": {
+        ".assetpack/mipmap/main{m}/verity/cruelty.png": {
             "isFolder": false,
-            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword.png",
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/cruelty.png",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        ".assetpack/compress/main{m}/sword.png": {
+        ".assetpack/compress/main{m}/verity/cruelty.png": {
             "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/sword.png",
+            "transformParent": ".assetpack/mipmap/main{m}/verity/cruelty.png",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword.png": {
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/cruelty.png": {
             "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/sword.png",
+            "transformParent": ".assetpack/compress/main{m}/verity/cruelty.png",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        ".assetpack/compress/main{m}/sword.webp": {
+        ".assetpack/compress/main{m}/verity/cruelty.webp": {
             "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/sword.png",
+            "transformParent": ".assetpack/mipmap/main{m}/verity/cruelty.png",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword.webp": {
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/cruelty.webp": {
             "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/sword.webp",
+            "transformParent": ".assetpack/compress/main{m}/verity/cruelty.webp",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        ".assetpack/mipmap/main{m}/sword@0.5x.png": {
+        ".assetpack/mipmap/main{m}/verity/cruelty@0.5x.png": {
             "isFolder": false,
-            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/sword.png",
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/cruelty.png",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        ".assetpack/compress/main{m}/sword@0.5x.png": {
+        ".assetpack/compress/main{m}/verity/cruelty@0.5x.png": {
             "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/sword@0.5x.png",
+            "transformParent": ".assetpack/mipmap/main{m}/verity/cruelty@0.5x.png",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword@0.5x.png": {
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/cruelty@0.5x.png": {
             "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/sword@0.5x.png",
+            "transformParent": ".assetpack/compress/main{m}/verity/cruelty@0.5x.png",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        ".assetpack/compress/main{m}/sword@0.5x.webp": {
+        ".assetpack/compress/main{m}/verity/cruelty@0.5x.webp": {
             "isFolder": false,
-            "transformParent": ".assetpack/mipmap/main{m}/sword@0.5x.png",
+            "transformParent": ".assetpack/mipmap/main{m}/verity/cruelty@0.5x.png",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
             },
             "transformData": {}
         },
-        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/sword@0.5x.webp": {
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/cruelty@0.5x.webp": {
             "isFolder": false,
-            "transformParent": ".assetpack/compress/main{m}/sword@0.5x.webp",
+            "transformParent": ".assetpack/compress/main{m}/verity/cruelty@0.5x.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/verity.png": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793924166441,
+                "duration": 34.4789579808712,
+                "success": true
+            },
+            "hash": "ZKX3sQ"
+        },
+        ".assetpack/mipmap/main{m}/verity/verity.png": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/verity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/verity.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/verity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/verity.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/verity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/verity.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/verity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/verity.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/verity.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/mipmap/main{m}/verity/verity@0.5x.png": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/verity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/verity@0.5x.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/verity@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/verity@0.5x.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/verity@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/verity@0.5x.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/verity@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/verity@0.5x.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/verity@0.5x.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/falsity.png": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793924166441,
+                "duration": 34.80399999022484,
+                "success": true
+            },
+            "hash": "sj8jzg"
+        },
+        ".assetpack/mipmap/main{m}/verity/falsity.png": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/falsity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/falsity.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/falsity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/falsity.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/falsity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/falsity.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/falsity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/falsity.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/falsity.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/mipmap/main{m}/verity/falsity@0.5x.png": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/falsity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/falsity@0.5x.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/falsity@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/falsity@0.5x.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/falsity@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/falsity@0.5x.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/falsity@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/falsity@0.5x.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/falsity@0.5x.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/lovity.png": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793924166441,
+                "duration": 35.04333299398422,
+                "success": true
+            },
+            "hash": "Kqe_Ag"
+        },
+        ".assetpack/mipmap/main{m}/verity/lovity.png": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/lovity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/lovity.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/lovity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/lovity.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/lovity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/lovity.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/lovity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/lovity.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/lovity.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/mipmap/main{m}/verity/lovity@0.5x.png": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/lovity.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/lovity@0.5x.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/lovity@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/lovity@0.5x.png": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/lovity@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/compress/main{m}/verity/lovity@0.5x.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/mipmap/main{m}/verity/lovity@0.5x.png",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/lovity@0.5x.webp": {
+            "isFolder": false,
+            "transformParent": ".assetpack/compress/main{m}/verity/lovity@0.5x.webp",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/ask me anything.mp3": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793926383075,
+                "duration": 232.4167079925537,
+                "success": true
+            },
+            "hash": "x85OIQ"
+        },
+        ".assetpack/audio/main{m}/verity/ask me anything.mp3": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/ask me anything.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/ask me anything.mp3": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/verity/ask me anything.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/audio/main{m}/verity/ask me anything.ogg": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/ask me anything.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/ask me anything.ogg": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/verity/ask me anything.ogg",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/hey.mp3": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793926383091,
+                "duration": 209.06029200553894,
+                "success": true
+            },
+            "hash": "Ud3rdQ"
+        },
+        ".assetpack/audio/main{m}/verity/hey.mp3": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/hey.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/hey.mp3": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/verity/hey.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/audio/main{m}/verity/hey.ogg": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/hey.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/hey.ogg": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/verity/hey.ogg",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/i know about a million things.mp3": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793926383093,
+                "duration": 221.44350001215935,
+                "success": true
+            },
+            "hash": "rltTtg"
+        },
+        ".assetpack/audio/main{m}/verity/i know about a million things.mp3": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/i know about a million things.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/i know about a million things.mp3": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/verity/i know about a million things.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/audio/main{m}/verity/i know about a million things.ogg": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/i know about a million things.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/i know about a million things.ogg": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/verity/i know about a million things.ogg",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/its me.mp3": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793926383096,
+                "duration": 207.50341701507568,
+                "success": true
+            },
+            "hash": "bcm8TA"
+        },
+        ".assetpack/audio/main{m}/verity/its me.mp3": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/its me.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/its me.mp3": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/verity/its me.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/audio/main{m}/verity/its me.ogg": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/its me.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/its me.ogg": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/verity/its me.ogg",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/its verity.mp3": {
+            "isFolder": false,
+            "parent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {},
+            "stats": {
+                "date": 1793926383097,
+                "duration": 205.91591700911522,
+                "success": true
+            },
+            "hash": "GvtoCA"
+        },
+        ".assetpack/audio/main{m}/verity/its verity.mp3": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/its verity.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/its verity.mp3": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/verity/its verity.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        ".assetpack/audio/main{m}/verity/its verity.ogg": {
+            "isFolder": false,
+            "transformParent": "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/raw-assets/main{m}/verity/its verity.mp3",
+            "metaData": {},
+            "inheritedMetaData": {
+                "m": true
+            },
+            "transformData": {}
+        },
+        "/Users/joycezhuo/Documents/Coding Projects/WeaponBallBattles/public/assets/main/verity/its verity.ogg": {
+            "isFolder": false,
+            "transformParent": ".assetpack/audio/main{m}/verity/its verity.ogg",
             "metaData": {},
             "inheritedMetaData": {
                 "m": true
