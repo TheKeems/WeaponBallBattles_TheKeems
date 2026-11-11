@@ -96,7 +96,10 @@ export function drawHitboxDebug(hitbox: Hitbox | hitboxthatdoesnothing, ball?: B
       .stroke({ width: BORDER_WIDTH, color: 0x000000 });
   };
 
-  addBall("unarmed", 1, 100);
+  addBall("unarmed", 1, 250);
+  addBall("sword", 0, 100);
+  addBall("sword", 0, 100);
+  addBall("sword", 0, 100);
   addBall("sword", 0, 100);
 
   //const testbox = new hitboxthatdoesnothing(100, 100, "empty.png", 150, 35, hitboxShape.RECT, -0.1, 0.5);
