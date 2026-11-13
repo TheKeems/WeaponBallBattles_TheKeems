@@ -1,5 +1,5 @@
 import { Assets, Sprite, Text, Container, ColorMatrixFilter, ColorSource } from "pixi.js";
-import { removeFromArr, randInt, setTimeflow, ballsconfig, gameBounds, collisionMatrix } from "../src/main";
+import { removeFromArr, randInt, setTimeflow, ballsconfig, gameBounds, collisionMatrix, ballDisplays, removeBall } from "../src/main";
 import { Hitbox, Melee } from "../scripts/index";
 import { sound } from '@pixi/sound';
 
@@ -49,7 +49,7 @@ interface Buff {
   duration?: number
 }
 
-export interface BComponent {
+interface BComponent {
   name: string;
   tags: string[];
   parent: Ball;
@@ -62,7 +62,7 @@ const shapeConv: Record<string, number> = {
   "circle": 1 // CIRCLE
 }
 
-export class shapeshiftComponent implements BComponent {
+class shapeshiftComponent implements BComponent {
   readonly name = "shapeshiftComponent";
   readonly tags;
   parent;
@@ -106,7 +106,7 @@ export class shapeshiftComponent implements BComponent {
             break;
           }
           case 3:{
-            this.parent.heal(2)
+            this.parent.heal(this.parent.getAtk()/2)
             break;
           }
         }
@@ -117,7 +117,7 @@ export class shapeshiftComponent implements BComponent {
   }
 }
 
-export class collisionDmgComponent implements BComponent {
+class collisionDmgComponent implements BComponent {
   readonly name = "collisionDmgComponent";
   readonly tags;
   parent;
@@ -131,7 +131,7 @@ export class collisionDmgComponent implements BComponent {
   }
 }
 
-export class PreDamageComponent implements BComponent {
+class PreDamageComponent implements BComponent {
   readonly name = "PreDamageComponent";
   readonly tags;
   parent;
@@ -151,7 +151,7 @@ export class PreDamageComponent implements BComponent {
   }
 }
 
-export class scaleComponent implements BComponent {
+class scaleComponent implements BComponent {
   readonly name = "scaleComponent";
   readonly tags;
   parent;
@@ -180,7 +180,7 @@ export class scaleComponent implements BComponent {
   }
 }
 
-export class soundComponent implements BComponent {
+class soundComponent implements BComponent {
   readonly name = "soundComponent";
   readonly tags;
   parent;
@@ -204,6 +204,7 @@ export class soundComponent implements BComponent {
 
 
 export class Ball extends Container {
+  readonly id;
   private health;
   private atk;
   private defMod = 0;
@@ -227,6 +228,7 @@ export class Ball extends Container {
 
   constructor(
     ballType: string,
+    id : number,
     team: number = 0,
     health: number = 100
   ) {
@@ -245,6 +247,7 @@ export class Ball extends Container {
 
     this.sortableChildren = true;
 
+    this.id = id;
     this.scl = scl;
     this.name = ballType;
     this.title = title;
@@ -340,11 +343,14 @@ export class Ball extends Container {
     //ON DEATH
     if (this.health <= 0) {
       this.removeFromParent();
+      removeBall(this.id);
       this.destroy({ children: true })
       return;
     }
 
     this.move(delta);
+    this.updateDisplay();
+
     for (const key of this.hitboxes) {
       key.update(deltams);
     }
@@ -409,9 +415,11 @@ export class Ball extends Container {
     else {
       damageTaken *= (1 / (1 + this.defMod));
     }
+
     this.health -= damageTaken;
     this.healthLabel.text = Math.round(this.health);
     this.colorMatrix.brightness(1.2, false);
+    
     if (this.health > 0) {
       setTimeflow(false);
       setTimeout(() => {
@@ -612,6 +620,10 @@ export class Ball extends Container {
   heal(n : number){
     this.health += n;
     this.healthLabel.text = Math.round(this.health);
+  }
+
+  updateDisplay(){
+    ballDisplays[this.id].text = this.title + ": " + Math.round(this.health);
   }
 
   // hasComponent(s : string) : boolean{

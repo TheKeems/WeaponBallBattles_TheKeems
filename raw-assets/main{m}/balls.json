@@ -47,7 +47,7 @@
             "Current Speed" : 0,
             "Max Speed" : 0
         },
-        "hideHealth" : false
+        "hideHealth" : true
     },
     "unarmed" : {
         "title" : "Unarmed",
