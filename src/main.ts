@@ -9,7 +9,7 @@ const GAME_HEIGHT = 800;
 const GAME_WIDTH = 800;
 const CELL_SIZE = GAME_HEIGHT / 5;
 let timeFlow = true;
-export let collisionMatrix: Ball[][][] = [[[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []]];
+export const collisionMatrix: Ball[][][] = [[[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []], [[], [], [], [], []]];
 
 export interface appBounds {
   left: number;
@@ -28,8 +28,8 @@ const gameContainer = new Container();
 export let ballsconfig: Record<string, BallConfig>;
 export let gameBounds: appBounds;
 export const debugGfx = new Graphics();
-export let balls: Record<number, Ball> = {};
-export let ballDisplays: Record<number, Text> = {};
+export const balls: Record<number, Ball> = {};
+export const ballDisplays: Record<number, Text> = {};
 
 export function setTimeflow(b: boolean) {
   timeFlow = b;

@@ -77,8 +77,8 @@ export class Hitbox extends Sprite {
            
             for (let i = -r_int; i <= r_int; i++) {
                 for (let j = -h_int; j <= h_int; j++) {
-                    let r = Math.floor(boundBox[0].x / gameBounds.cell_size) + i;
-                    let c = Math.floor(boundBox[0].y / gameBounds.cell_size) + j;
+                    const r = Math.floor(boundBox[0].x / gameBounds.cell_size) + i;
+                    const c = Math.floor(boundBox[0].y / gameBounds.cell_size) + j;
                     if (r >= 0 && c >= 0 && r < collisionMatrix.length && c < collisionMatrix[r].length) {
                         for (const key of collisionMatrix[r][c]) {
                             if (key.team != this.par.team && this.checkHit(key)) {

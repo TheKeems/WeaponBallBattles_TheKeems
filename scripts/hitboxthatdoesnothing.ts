@@ -14,7 +14,7 @@ export class hitboxthatdoesnothing extends Hitbox {
         anchor: number,
         a_2?: number
     ) {
-        super(new Ball("test"), file, 0, width, height, shape, false, anchor, a_2);
+        super(new Ball("test", -1), file, 0, width, height, shape, false, anchor, a_2);
         this.x = x;
         this.y = y;
     }
