@@ -7,8 +7,8 @@
   "scripts": {
     "start": "npm run dev",
     "build": "npm run lint && tsc && vite build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "predeploy": "npm run dev",
+    "deploy": "gh-pages -d dev",
     "lint": "eslint .",
     "dev": "vite"
   },
